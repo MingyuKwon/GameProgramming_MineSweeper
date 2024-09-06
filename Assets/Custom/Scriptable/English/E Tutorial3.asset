@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10caac1bb6bfd814b8a2806f1339ad78, type: 3}
+  m_Name: E Tutorial3
+  m_EditorClassIdentifier: 
+  stringCount: 3
+  line1:
+  - '"Now that we''ve arrived at the next level, and since you''ve already learned
+    about items used on the spot in the previous level, this time I''ll introduce
+    you to items that can be used on rocks.'
+  - When used on a rock, these items can either remove the rock or reveal if there's
+    a treasure beneath it.
+  - This time, click the <b>[mouse wheel]</b> on a rock to open the item window!
+  line1Animation: []
+  line2:
+  - Items that are used on rocks can only be used when there are rocks adjacent to
+    them.
+  - 'The item on the right is <b>[Holy Water]</b>. When <b>[used on a rock]</b>,
+    it tells you whether the <b>[rock is hiding a treasure or not]</b>.
+
+    
+
+    However,
+    if it''s not hiding a treasure, it can''t distinguish whether it''s a trap or
+    just a regular rock.'
+  - 'The item to the south is a <b>[Pickaxe]</b>. Unlike other items, it can be used
+    infinitely.
+
+    When <b>[used on a rock]</b>, it breaks the rock, and if there
+    was <b>[a trap, it eliminates the trap]</b>.
+
+    
+
+    However, if you <b>[break
+    a rock hiding a treasure]</b>, it''s an immediate <b>[game over]</b>, so use
+    it only when you''re sure it''s not a treasure!'
+  - 'If you''re confused, open the <b>[menu window]</b> to read the item descriptions
+    again!
+
+    
+
+    Now, let''s use the items to find all the treasures while
+    avoiding traps!'
+  line2Animation:
+  - 
+  - 
+  - 
+  line3:
+  - 'You''ve splendidly found all the treasures!
+
+    
+
+'
+  - 'If the items in the previous level could heal you or change the numbers,
+
+    
+
+    the
+    items for rocks can either break them or confirm if there''s a treasure underneath.'
+  - Now, let's move down to the next level!
+  line3Animation: []
+  line4: []
+  line4Animation: []
+  line5: []
+  line5Animation: []

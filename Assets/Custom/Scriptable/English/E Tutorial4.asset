@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10caac1bb6bfd814b8a2806f1339ad78, type: 3}
+  m_Name: E Tutorial4
+  m_EditorClassIdentifier: 
+  stringCount: 2
+  line1:
+  - '"Now that we''ve reached the next level, take a look at the <b>[per Stage]</b>
+    window on the left.
+
+    
+
+    You''ll notice that the number of additional
+    magnifying glasses has increased.'
+  - 'Now, there is a <b>[time limit]</b>.
+
+    
+
+    Be careful! If you don''t
+    find all the treasures and exit the level within the time limit, it will be game
+    over.'
+  - 'Go ahead and give it a try!
+
+    
+
+'
+  line1Animation: []
+  line2:
+  - 'Excellent! You have now completed all the tutorial stages.
+
+    
+
+'
+  - Proceed to the lower floor to wrap up the final details!
+  line2Animation:
+  - 
+  line3: []
+  line3Animation: []
+  line4: []
+  line4Animation: []
+  line5: []
+  line5Animation: []

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10caac1bb6bfd814b8a2806f1339ad78, type: 3}
+  m_Name: Tutorial2 Rest
+  m_EditorClassIdentifier: 
+  stringCount: 2
+  line1:
+  - "\uC774\uBC88\uC5D0\uB3C4 \uC26C\uB294 \uCE35\uC785\uB2C8\uB2E4. \uBCF4\uBB3C
+    \uC0C1\uC790\uB97C \uBA39\uC5B4 \uBD05\uC2DC\uB2E4"
+  line1Animation: []
+  line2:
+  - "\uC774 \uC544\uC774\uD15C\uC740 \uC2A4\uD14C\uC774\uC9C0 \uC2DC\uC791\uC2DC 
+    <b>[\uB3CB\uBCF4\uAE30\uB97C \uCD94\uAC00\uB85C \uC8FC\uB294 \uC544\uC774\uD15C]<b>\uC785\uB2C8\uB2E4.\n\n\uB2E4\uC74C
+    \uCE35\uC73C\uB85C \uB0B4\uB824\uAC14\uC744 \uB54C, \uB3CB\uBCF4\uAE30 \uCD94\uAC00
+    \uC9C0\uAE09 \uAC1C\uC218\uAC00 \uC99D\uAC00\uD558\uBA70, <b>[per Stage]</b>\uC5D0
+    \uBC18\uC601 \uB420 \uAC83\uC785\uB2C8\uB2E4"
+  - "\uC790, \uC774\uC81C \uB2E4\uC74C \uCE35\uC73C\uB85C \uB0B4\uB824\uAC00 \uBCF4\uC8E0"
+  line2Animation:
+  - 
+  line3: []
+  line3Animation: []
+  line4: []
+  line4Animation: []
+  line5: []
+  line5Animation: []
