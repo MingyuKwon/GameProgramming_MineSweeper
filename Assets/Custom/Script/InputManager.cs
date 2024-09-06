@@ -66,8 +66,7 @@ public class InputManager : MonoBehaviour
     #region static Field
     public static InputManager instance = null;
     public static Stack<InputMode> inputControlStack = new Stack<InputMode>();
-    public static int currentInputRule = 0;
-    public static InputCheck inputCheck;
+    
     #endregion
     
     void Awake() {
@@ -89,30 +88,6 @@ public class InputManager : MonoBehaviour
         }
 
         inputControlStack.Push(type);
-        changePlayerInputRule();
-    }
-
-    private static void changePlayerInputRule(int ruleNum)
-    {
-
-    }
-
-    private static void changePlayerInputRule()
-    {
-        if(inputControlStack.Count == 0)
-        {
-            return;
-        }
-
-        switch(inputControlStack.Peek())
-        {
-            case InputMode.InGame :
-                changePlayerInputRule(0);
-                break;
-            case InputMode.UI :
-                changePlayerInputRule(1);
-                break;
-        }
     }
 
     public static bool itemLock = false;

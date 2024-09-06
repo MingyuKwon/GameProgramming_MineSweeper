@@ -8,9 +8,6 @@ public class DifficultyPanel : MonoBehaviour
 {
     public ToggleGroup toggleGroup;
     public Toggle[] buttons;
-
-    public ToggleGroup ModetoggleGroup;
-    public Toggle[] Modebuttons;
  
     public GameObject[] Panels;
     [Header("for Adventure Panel")]
@@ -101,18 +98,6 @@ public class DifficultyPanel : MonoBehaviour
 
     private void OnEnable() {
         UpdateDifficulty();
-        UpdateMode();
-    }
-
-    private void UpdateMode()
-    {
-        int mode = (int)StageInformationManager.getGameMode();
-        mode = Mathf.Clamp(mode,0,1);
-        Toggle selectedToggle = Modebuttons[mode];
-        
-        // Toggle Group을 사용하여 선택한 Toggle 활성화
-        ModetoggleGroup.SetAllTogglesOff(); // 모든 토글을 끄고
-        selectedToggle.isOn = true; // 선택한 토글만 켭니다.
     }
 
 
