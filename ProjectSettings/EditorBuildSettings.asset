@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Before Main Menu.unity
+    guid: d7114019d805bb1409ab2b678433681d
+  - enabled: 1
+    path: Assets/Scenes/Before Enter Dungeon.unity
+    guid: 3ca712ff847e18b40b42daf38bc11972
+  - enabled: 1
+    path: Assets/Scenes/Cave Dungeon.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Cave Rest.unity
+    guid: 5f100291723c68343b145c1303a72a9a
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 1937b2f827a6e024eb4229b33760abab
+  - enabled: 1
+    path: Assets/Scenes/Cave Last.unity
+    guid: ef65f2a6a9b475641b0a967aae993f9f
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: c3b304a2ebed8a6419432fb30403284a
+  - enabled: 1
+    path: Assets/Scenes/Tutorial 1.unity
+    guid: c461dca493b87b64cb6b96c927e26a3d
+  - enabled: 1
+    path: Assets/Scenes/Tutorial Rest 1.unity
+    guid: f64890b38a19d084e867cd1181893555
+  - enabled: 1
+    path: Assets/Scenes/Tutorial 3.unity
+    guid: e34a3b63fbd31aa4e894d43e68d1345a
+  - enabled: 1
+    path: Assets/Scenes/Tutorial Rest 2.unity
+    guid: 0612a4753e56406488a38a439316c6bc
+  - enabled: 1
+    path: Assets/Scenes/Tutorial 4.unity
+    guid: 12114ea8bedae8145a0c03653f49d22e
+  - enabled: 1
+    path: Assets/Scenes/Tutorial Last.unity
+    guid: 59f6ceffe86a3ab4db3aa2d0ca3f0e70
+  - enabled: 1
+    path: Assets/Scenes/Tutorial Rest 0.unity
+    guid: 88f0ca9cbd066c1439bc8ca1c7afefd6
+  - enabled: 1
+    path: Assets/Scenes/Tutorial 2.unity
+    guid: e708e2949e89345428cfe4680147853e
+  - enabled: 1
+    path: Assets/Scenes/Crypt Dungeon.unity
+    guid: f9f543ee44b04cd49acfc73e9a1f2d4b
+  - enabled: 1
+    path: Assets/Scenes/Crypt Rest.unity
+    guid: 4b57b050725ed3b44b2738e810b81e45
+  - enabled: 1
+    path: Assets/Scenes/Crypt Last.unity
+    guid: ffe8179522d48d4439e0b371ad2b98db
+  - enabled: 1
+    path: Assets/Scenes/Ruin Dungeon.unity
+    guid: 10ec8e6026fd72141b876f723262a571
+  - enabled: 1
+    path: Assets/Scenes/Ruin Last.unity
+    guid: 30b44b5255043f640b1324231712b706
+  - enabled: 1
+    path: Assets/Scenes/Ruin Rest.unity
+    guid: c44898ec30e7a844a8fad4fa229216d4
+  m_configObjects: {}

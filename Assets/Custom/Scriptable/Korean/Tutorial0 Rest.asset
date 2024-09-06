@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10caac1bb6bfd814b8a2806f1339ad78, type: 3}
+  m_Name: Tutorial0 Rest
+  m_EditorClassIdentifier: 
+  stringCount: 1
+  line1:
+  - "\uC2A4\uD14C\uC774\uC9C0 \uD074\uB9AC\uC5B4\uB97C \uCD95\uD558\uD569\uB2C8\uB2E4!
+    \uC774\uBC88 \uCE35\uC740 \uC26C\uC5B4\uAC00\uB294 \uCE35\uC774\uACE0, \uB2E4\uC74C
+    \uCE35\uC73C\uB85C \uBC14\uB85C \uAC08 \uC218 \uC788\uC2B5\uB2C8\uB2E4"
+  - "\uD55C \uCE35\uC744 \uB05D\uB0BC \uB54C \uB9C8\uB2E4  <b>[\uCCB4\uB825\uC740
+    \uC790\uB3D9 \uD68C\uBCF5]</b> \uB429\uB2C8\uB2E4."
+  line1Animation: []
+  line2: []
+  line2Animation:
+  - 
+  line3: []
+  line3Animation: []
+  line4: []
+  line4Animation: []
+  line5: []
+  line5Animation: []

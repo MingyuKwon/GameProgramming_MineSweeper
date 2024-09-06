@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10caac1bb6bfd814b8a2806f1339ad78, type: 3}
+  m_Name: E Tutorial2
+  m_EditorClassIdentifier: 
+  stringCount: 3
+  line1:
+  - '"Now that we''ve reached the next level, take a look at the <b>[per Stage]</b>
+    window on the left.
+
+    
+
+    It shows the number of items that are replenished
+    each time you descend a floor.'
+  - While the base number of additional items is small, you can increase it by acquiring
+    equipment items that add to this count.
+  - 'Now, let''s learn about using items.
+
+    
+
+    Click on the <b>[mouse wheel]</b>
+    to open the item window!'
+  line1Animation: []
+  line2:
+  - 'What you see now is the item window.
+
+    
+
+    In the item window, <b>[items
+    that are available for use appear clear, while unavailable ones appear dim]</b>.'
+  - 'You can click on an item in the item window to use it.
+
+    
+
+    Let''s talk
+    about items that can be used on the spot.'
+  - The item to the north is a <b>[Potion]</b>. It can be <b>[used on the spot]</b>
+    and, when used, <b>[restores one health bar]</b>.
+  - 'The item on the left is a <b>[Magnifying Glass]</b>.
+
+    
+
+    It can be
+    <b>[used on the spot]</b>, and when used, <b>[differentiates the numbers on the
+    floor into traps and treasures]</b>, with the left being traps and the right
+    being treasures.'
+  - 'If you''re confused, open the <b>[menu window]</b> to read the item descriptions
+    again!
+
+    
+
+    Now, let''s use the items to find all the treasures while
+    avoiding traps!'
+  line2Animation:
+  - 
+  line3:
+  - "You've splendidly found all the treasures!\r\n\r"
+  - 'You might have noticed that <b>[each time you open a treasure chest, additional
+    items are awarded]</b>.
+
+    
+
+    <b>Items are randomly given, and sometimes
+    you might not get anything</b>.'
+  - "Now, let's move down to the next level!\"\r\n\r"
+  line3Animation: []
+  line4: []
+  line4Animation: []
+  line5: []
+  line5Animation: []

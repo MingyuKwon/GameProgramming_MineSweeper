@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10caac1bb6bfd814b8a2806f1339ad78, type: 3}
+  m_Name: E Tutorial1
+  m_EditorClassIdentifier: 
+  stringCount: 5
+  line1:
+  - 'Welcome to the tutorial! If you''ve played <b>[Minesweeper]</b> before, you''ll
+    find this easy to grasp.
+
+
+
+'
+  - 'As a treasure hunter, you must avoid traps and <b>[collect all the treasures]</b>
+    to proceed to the next level.
+
+'
+  - 'The numbers written on the floor represent the sum of <b>[traps and treasures]</b>
+    surrounding that number.
+
+
+    Using this, you can distinguish between rocks
+    hiding <b>[treasures or traps]</b> and those that are not.'
+  - You can move by <b>[clicking on adjacent tiles]</b>. Give it a try and move around!
+  line1Animation: []
+  line2:
+  - Just like you did now, by <b>[clicking a certain location]</b>, you can <b>[move
+    to that spot]</b>.
+  - 'Look around, and you''ll find rocks where it''s certain that <b>[treasures or
+    traps are hidden]</b>.
+
+
+    <b>[Right-click]</b> on such rocks to <b>[mark]</b>
+    them.'
+  line2Animation: []
+  line3:
+  - 'This way, you can differentiate the marked rocks for sure.
+
+
+    Remember, you
+    can only <b>[mark rocks that are accessible]</b>.'
+  - 'Now, let''s clear some rocks. <b>[Left-click]</b> on a nearby rock to shovel
+    it away.
+
+
+    To clear a rock, you need to be <b>[right beside it]</b>.'
+  line3Animation: []
+  line4:
+  - If you hit a trap, you'll take damage; if you find a treasure, you'll get an
+    item.
+  - Now, let's find all the treasures in the field and open the door to the next
+    level.
+  line4Animation: []
+  line5:
+  - The door to the next level is open! Hurry to the stairs and head down to the
+    next floor."
+  line5Animation: []

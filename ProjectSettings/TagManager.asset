@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Obstacle
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Base
+    uniqueID: 85760209
+    locked: 0
+  - name: Bound
+    uniqueID: 2417723231
+    locked: 0
+  - name: Total Num
+    uniqueID: 735897087
+    locked: 0
+  - name: Bomb Num
+    uniqueID: 2119439669
+    locked: 0
+  - name: Treasure Num
+    uniqueID: 3578397805
+    locked: 0
+  - name: Mine and Treasure Object
+    uniqueID: 747022089
+    locked: 0
+  - name: Obstacle
+    uniqueID: 926473523
+    locked: 0
+  - name: treasure search
+    uniqueID: 1416405165
+    locked: 0
+  - name: Flag
+    uniqueID: 2451867523
+    locked: 0
+  - name: Interact Ok
+    uniqueID: 627362339
+    locked: 0
+  - name: Crack Animatin
+    uniqueID: 47663113
+    locked: 0
+  - name: Player
+    uniqueID: 2124930459
+    locked: 0
+  - name: Focus
+    uniqueID: 1117553413
+    locked: 0
+  - name: Overlay Total
+    uniqueID: 3949042151
+    locked: 0
+  - name: Overlay Mine
+    uniqueID: 3467849933
+    locked: 0
+  - name: Overlay Treasure
+    uniqueID: 1603285875
+    locked: 0
