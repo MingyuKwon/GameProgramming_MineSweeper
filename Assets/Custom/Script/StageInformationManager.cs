@@ -105,7 +105,7 @@ public class StageInformationManager
     private static int MaxHeartDefault = 3;
     private static int CurrentHeartDefault = 3;
 
-    private static GameModeType gameMode = GameModeType.adventure;
+    private static GameModeType gameMode = GameModeType.stage;
     public static void changeGameMode(GameModeType gM)
     {
         gameMode = gM;
