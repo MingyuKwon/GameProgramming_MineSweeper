@@ -26,33 +26,8 @@ public class InputManager : MonoBehaviour
 {
     public static IngameInputHardWare currentInputHardware = IngameInputHardWare.Mouse;
 
-    #region InputCheck
-    public class InputCheck
-    {
-
-
-    }
-    #endregion
-
     public class InputEvent
     {
-        static bool isCurrentInput(InputMode type)
-        {
-            bool flag = false;
-
-            if(inputControlStack.Count == 0)
-            {
-                return flag;
-            }
-
-            if(inputControlStack.Peek() == type)
-            {
-                flag = true;
-            }
-
-            return flag;
-        }
-
         #region Event
         public static event Action<Vector3Int> MovePressEvent;
         public static void Invoke_Move(Vector3Int position)
@@ -63,12 +38,9 @@ public class InputManager : MonoBehaviour
         #endregion
     }
 
-    #region static Field
     public static InputManager instance = null;
     public static Stack<InputMode> inputControlStack = new Stack<InputMode>();
-    
-    #endregion
-    
+        
     void Awake() {
         if(instance == null)
         {
@@ -95,10 +67,9 @@ public class InputManager : MonoBehaviour
 
         bool input2Ok = false;
 
-        bool isDownButton0 = Input.GetMouseButtonDown(0);
-        bool isDownButton1 = Input.GetMouseButtonDown(1);
-        bool isDownButton2 = Input.GetMouseButtonDown(2);
-        bool isDownButton3 = Input.GetMouseButtonDown(3);
+        bool isDownButton0 = Input.GetMouseButtonDown(0); // 좌 클릭
+        bool isDownButton1 = Input.GetMouseButtonDown(1); // 우 클릭
+        bool isDownButton2 = Input.GetMouseButtonDown(2); // 마우스 휠
 
         if(isDownButton2)
         {
@@ -107,11 +78,6 @@ public class InputManager : MonoBehaviour
                 input2Ok = true;
                 StageManager.instance?.ItemPanelShow(false);
             }
-        }
-
-        if(isDownButton3)
-        {
-            EventManager.instance.StairOpen_Invoke_Event();
         }
 
         if(EventSystem.current.IsPointerOverGameObject()) return;
