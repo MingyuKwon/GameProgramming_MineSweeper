@@ -106,7 +106,6 @@ public class MainMenu : MonoBehaviour , AlertCallBack
     {
         MakeScreenBlack.Hide();
         LoadingInformation.loadingSceneName = loadAdventureSceneName[StageInformationManager.currentStagetype];
-        StageInformationManager.changeGameMode(GameModeType.stage);
         SceneManager.LoadScene("Before Enter Dungeon");
     }
 

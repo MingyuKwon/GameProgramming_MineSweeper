@@ -210,22 +210,11 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             usableItemExplain[1].text = EnglishUsableText[1];
             usableItemExplain[2].text = EnglishUsableText[2];
 
-            for(int i=0; i<EquippedItem.equippedItemCount; i++)
-            {
-                equipppedItemExplain[i].text = EnglishEquippedText[(int)EquippedItem.playerEquippedItem[i]];
-            }
-
-            
         }else if(LanguageManager.currentLanguage == "Korean")
         {
             usableItemExplain[0].text = KoreanUsableText[0];
             usableItemExplain[1].text = KoreanUsableText[1];
             usableItemExplain[2].text = KoreanUsableText[2];
-
-            for(int i=0; i<EquippedItem.equippedItemCount; i++)
-            {
-                equipppedItemExplain[i].text = KoreanEquippedText[(int)EquippedItem.playerEquippedItem[i]];
-            }
         }
     }
 
@@ -520,12 +509,6 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             EquippedItemImages[i].sprite = EquippedItemSprites[0];
             equipppedItemExplain[i].text = "";
         }
-        for(int i=0; i<EquippedItem.equippedItemCount; i++)
-        {
-            
-            EquippedItemImages[i].sprite = EquippedItemSprites[(int)EquippedItem.playerEquippedItem[i] - 4 + 1];
-            equipppedItemExplain[i].text = "";
-        }
 
         if(LanguageManager.currentLanguage == "Korean")
         {
@@ -572,13 +555,8 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             stageType.text = KoreanStage[stagetype];
             width.text = "너비 : " + StageInformationManager.NextWidth.ToString();
             height.text = "높이 : " + StageInformationManager.NextHeight.ToString();
-            if(StageInformationManager.getGameMode() == GameModeType.stage)
-            {
-                stageIndex.text = "스테이지";
-            }else
-            {
-                stageIndex.text = "레벨 " + ((StageInformationManager.currentStageIndex + 1).ToString());
-            }
+            stageIndex.text = "스테이지";
+
             
             left.text = "남은 수";
             stagePer.text = "스테이지 마다";
@@ -589,13 +567,8 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             stageType.text = EnglishStage[stagetype];
             width.text = "Width : " + StageInformationManager.NextWidth.ToString();
             height.text = "Height : " + StageInformationManager.NextHeight.ToString();
-            if(StageInformationManager.getGameMode() == GameModeType.stage)
-            {
-                stageIndex.text = "STAGE";
-            }else
-            {
-                stageIndex.text = "Level " + ((StageInformationManager.currentStageIndex + 1).ToString());
-            }
+            stageIndex.text = "STAGE";
+
             
             left.text = "Left";
             stagePer.text = "stage per";
@@ -603,20 +576,11 @@ public class InGameUI : MonoBehaviour, AlertCallBack
         
         trapDamage.text = "X" + StageInformationManager.DefaultTrapDamage[difficulty].ToString();
         
-        if(StageInformationManager.getGameMode() == GameModeType.stage)
-        {
-            potionPlus.text = "+" +0.ToString();
-            magGlassPlus.text = "+" + 0.ToString();
-            holyWaterPlus.text = "+" + 0.ToString();
-            TimePlus.text = "+" +  0.ToString();
+        potionPlus.text = "+" +0.ToString();
+        magGlassPlus.text = "+" + 0.ToString();
+        holyWaterPlus.text = "+" + 0.ToString();
+        TimePlus.text = "+" +  0.ToString();
 
-        }else
-        {
-            potionPlus.text = "+" + (StageInformationManager.plusPotion_Default_perStage[difficulty] + EquippedItem.Heart_StageBonus).ToString();
-            magGlassPlus.text = "+" + (StageInformationManager.plusMag_Default_perStage[difficulty] + EquippedItem.Glass_StageBonus).ToString();
-            holyWaterPlus.text = "+" + (StageInformationManager.plusHoly_Default_perStage[difficulty] + EquippedItem.Holy_StageBonus).ToString();
-            TimePlus.text = "+" +  (StageInformationManager.DefaultTimeperStage[difficulty] + EquippedItem.Time_StageBonus).ToString();
-        }
         
         SetLanguageTexts();
     }

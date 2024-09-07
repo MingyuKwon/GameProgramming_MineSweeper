@@ -11,9 +11,6 @@ using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour, IStageManager
 {   
-    public bool isTutorial = false;
-    public int tutorialStage;
-
     public static StageManager instance;
     public static bool isDungeon = true;
     const int DefaultX = 18;
@@ -97,14 +94,6 @@ public class StageManager : MonoBehaviour, IStageManager
                 {
                     // 스테이지 모드에서 모든 보물을 먹으면 거기서 게임 클리어
                     EventManager.instance.Invoke_StageClearEvent();
-                }else
-                {
-                    EventManager.instance.StairOpen_Invoke_Event();
-                    if(isTutorial && isDungeon && (tutorialStage == 1 && TutorialGuide.tutorialTextindex == 4)  || (tutorialStage == 2 && TutorialGuide.tutorialTextindex == 2)|| 
-                    (tutorialStage == 3 && TutorialGuide.tutorialTextindex == 2)||  (tutorialStage == 4 && TutorialGuide.tutorialTextindex == 1) )
-                    {
-                        EventManager.instance.Invoke_TutorialTextTriggerEvent();
-                    }  
                 }
                     
             }
@@ -156,7 +145,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
     bool holyWaterEnable{
         get{
-            return holyWaterCount > 0 && isFoucusOnObstacle && !(isTutorial && tutorialStage == 2  && isDungeon);
+            return holyWaterCount > 0 && isFoucusOnObstacle && isDungeon;
         }
     }
     #endregion
@@ -220,7 +209,6 @@ public class StageManager : MonoBehaviour, IStageManager
 
         if(LoadingInformation.loadingSceneName == "Main Menu") 
         {
-            EquippedItem.ClearEquippedItem();
             return;
         }
         
@@ -231,17 +219,11 @@ public class StageManager : MonoBehaviour, IStageManager
             int min = StageInformationManager.stageWidthMin[(int)StageInformationManager.difficulty,StageInformationManager.currentStageIndex];
             int max = StageInformationManager.stageWidthMax[(int)StageInformationManager.difficulty,StageInformationManager.currentStageIndex];
             
-            if(isTutorial)
-                {
-                    StageInformationManager.NextWidth = StageInformationManager.tutorialWidth[StageInformationManager.currentStageIndex];
-                    StageInformationManager.NextHeight= StageInformationManager.tutorialHeight[StageInformationManager.currentStageIndex];
-                }else
-                {
-                    StageInformationManager.NextWidth = UnityEngine.Random.Range(min, max+1); 
-                    StageInformationManager.NextHeight = StageInformationManager.stageHeightMin[(int)StageInformationManager.difficulty,StageInformationManager.currentStageIndex];
-                }
+            StageInformationManager.NextWidth = UnityEngine.Random.Range(min, max+1); 
+            StageInformationManager.NextHeight = StageInformationManager.stageHeightMin[(int)StageInformationManager.difficulty,StageInformationManager.currentStageIndex];
             
         }
+
         StageInformationManager.setHearts(maxHeart, currentHeart); 
         StageInformationManager.setUsableItems(potionCount,magGlassCount,holyWaterCount);
         StageInformationManager. NexttotalTime = timeLeft;
@@ -251,61 +233,24 @@ public class StageManager : MonoBehaviour, IStageManager
 
     private void Start() {
         MakeScreenBlack.Clear();
-        if(StageInformationManager.getGameMode() == GameModeType.stage)
-        {
-            int difficulty = (int)StageInformationManager.difficulty;        
-            int stageType = StageInformationManager.currentStagetype;
 
-            StageInformationManager.NextWidth = StageInformationManager.StageModestageWidth[stageType];
-            StageInformationManager.NextHeight= StageInformationManager.StageModestageHeight[stageType];
-            StageInformationManager.setHearts(3,3); 
-            StageInformationManager.setUsableItems(0,StageInformationManager.StageMagItemAmount[stageType,difficulty] , 0);
-            StageInformationManager.NexttotalTime = StageInformationManager.StageModeTime[stageType,difficulty];
+        int difficulty = (int)StageInformationManager.difficulty;        
+        int stageType = StageInformationManager.currentStagetype;
 
-            int[] usableItems = StageInformationManager.getUsableItems();
-            int[] hearts = StageInformationManager.getHearts();
+        StageInformationManager.NextWidth = StageInformationManager.StageModestageWidth[stageType];
+        StageInformationManager.NextHeight= StageInformationManager.StageModestageHeight[stageType];
+        StageInformationManager.setHearts(3,3); 
+        StageInformationManager.setUsableItems(0,StageInformationManager.StageMagItemAmount[stageType,difficulty] , 0);
+        StageInformationManager.NexttotalTime = StageInformationManager.StageModeTime[stageType,difficulty];
 
-            DungeonInitialize(StageInformationManager.NextWidth, StageInformationManager.NextHeight ,
-            StageInformationManager.difficulty ,hearts[0], hearts[1], 
-            usableItems[0], usableItems[1], usableItems[2], 
-            StageInformationManager. NexttotalTime);
+        int[] usableItems = StageInformationManager.getUsableItems();
+        int[] hearts = StageInformationManager.getHearts();
 
-            return;
-        }
+        DungeonInitialize(StageInformationManager.NextWidth, StageInformationManager.NextHeight ,
+        StageInformationManager.difficulty ,hearts[0], hearts[1], 
+        usableItems[0], usableItems[1], usableItems[2], 
+        StageInformationManager. NexttotalTime);
 
-        if(StageInformationManager.isnextStageDungeon)
-        {
-            if(StageInformationManager.currentStageIndex == 0)
-            {
-                if(isTutorial)
-                {
-                    StageInformationManager.NextWidth = StageInformationManager.tutorialWidth[0];
-                    StageInformationManager.NextHeight= StageInformationManager.tutorialHeight[0];
-
-                    StageInformationManager.difficulty = Difficulty.Easy;
-                    StageInformationManager.setHearts(); 
-                    StageInformationManager.setUsableItems(0,0,0);
-                    StageInformationManager. NexttotalTime = StageInformationManager.DefaultTimeforEntireGame;
-
-                }else
-                {
-                    StageInformationManager.setHearts(); 
-                    StageInformationManager.setUsableItems();
-                    StageInformationManager. NexttotalTime = StageInformationManager.DefaultTimeforEntireGame;
-                }
-            }
-
-            int[] usableItems = StageInformationManager.getUsableItems();
-            int[] hearts = StageInformationManager.getHearts();
-            DungeonInitialize(StageInformationManager.NextWidth, StageInformationManager.NextHeight ,StageInformationManager.difficulty ,hearts[0], hearts[1], usableItems[0], usableItems[1], usableItems[2], StageInformationManager. NexttotalTime);
-            
-            
-        }else
-        {
-            int[] usableItems = StageInformationManager.getUsableItems();
-            int[] hearts = StageInformationManager.getHearts();
-            RestPlaceInitialize(StageInformationManager.treasurePosition, hearts[0], hearts[1], usableItems[0], usableItems[1], usableItems[2], StageInformationManager. NexttotalTime);
-        }
         
     }
 
@@ -317,21 +262,9 @@ public class StageManager : MonoBehaviour, IStageManager
             {
                 if(!interactOkflag) return;
 
-                
-
                 isNowInputtingItem = true;
-                EventManager.instance.ItemPanelShow_Invoke_Event(currentFocusPosition, true, holyWaterEnable, isFoucusOnObstacle && !(isTutorial && tutorialStage == 2  && isDungeon), magGlassEnable , potionEnable);
+                EventManager.instance.ItemPanelShow_Invoke_Event(currentFocusPosition, true, holyWaterEnable, isFoucusOnObstacle && isDungeon, magGlassEnable , potionEnable);
                 GameAudioManager.instance.PlaySFXMusic(SFXAudioType.itemMenuShow);  
-
-                if(isTutorial && tutorialStage == 2  && isDungeon && !isFoucusOnObstacle && TutorialGuide.tutorialTextindex == 1)
-                {
-                    EventManager.instance.Invoke_TutorialTextTriggerEvent();
-                }  
-
-                if(isTutorial && tutorialStage == 3  && isDungeon && isFoucusOnObstacle && TutorialGuide.tutorialTextindex == 1)
-                {
-                    EventManager.instance.Invoke_TutorialTextTriggerEvent();
-                }  
 
             }
         }else
@@ -353,34 +286,11 @@ public class StageManager : MonoBehaviour, IStageManager
             if(isNowInputtingItem) return;
             if(shovelLock) return;
 
-            if(isDungeon)
-            {
-                EventManager.instance.ItemUse_Invoke_Event(ItemUseType.Shovel, gapBetweenPlayerFocus);
-                GameAudioManager.instance.PlaySFXMusic(SFXAudioType.Shovel);
-                RemoveObstacle(currentFocusPosition);     
+            EventManager.instance.ItemUse_Invoke_Event(ItemUseType.Shovel, gapBetweenPlayerFocus);
+            GameAudioManager.instance.PlaySFXMusic(SFXAudioType.Shovel);
+            RemoveObstacle(currentFocusPosition);     
 
-                if(isTutorial && tutorialStage == 1 &&isDungeon && TutorialGuide.tutorialTextindex == 3)
-                {
-                    EventManager.instance.Invoke_TutorialTextTriggerEvent();
-                }       
-            }else
-            {
-                if(BigTreasurePosition == currentFocusPosition) 
-                {
-                    BigTreasurePosition = Vector3Int.forward;
-                    EquippedItem.SetNextEquippedItem();
-                    if(EquippedItem.nextObtainItem == Item.Heart_UP) MaxHeartUP();
-                    EventManager.instance.ObtainBigItem_Invoke_Event();
-                    GameAudioManager.instance.PlaySFXMusic(SFXAudioType.GetBigItem);
-
-                    if(isTutorial && (tutorialStage == 1 || tutorialStage == 2 || tutorialStage == 3) && !isDungeon && TutorialGuide.tutorialTextindex == 1)
-                    {
-                        EventManager.instance.Invoke_TutorialTextTriggerEvent();
-                    } 
-                }
-                
-            }
-
+            
         }else
         {
             if(isNowInputtingItem) return;
@@ -391,12 +301,6 @@ public class StageManager : MonoBehaviour, IStageManager
             }
             
             InputManager.InputEvent.Invoke_Move(currentFocusPosition);
-
-
-            if(isTutorial && tutorialStage == 1 && isDungeon && TutorialGuide.tutorialTextindex == 1)
-            {
-                EventManager.instance.Invoke_TutorialTextTriggerEvent();
-            }
         }
     }
 
@@ -412,7 +316,6 @@ public class StageManager : MonoBehaviour, IStageManager
             SetPlayer_Overlay();
             SetInteract_Ok();
         }
-        
         
     }
 
@@ -752,11 +655,6 @@ public class StageManager : MonoBehaviour, IStageManager
         Vector3Int arrayPos = ChangeCellPosToArrayPos(cellPos);
         if(!(CheckHasObstacle(cellPos))) return; // 해당 위치에 장애물 타일이 없으면 무시
 
-            if(isTutorial && tutorialStage == 1 && isDungeon && TutorialGuide.tutorialTextindex == 2)
-            {
-                EventManager.instance.Invoke_TutorialTextTriggerEvent();
-            }
-
         if(forceful)
         {
             flagArray[arrayPos.y, arrayPos.x] = 0;
@@ -807,18 +705,9 @@ public class StageManager : MonoBehaviour, IStageManager
     private void GetItem(bool isUsable)
     {
         GameAudioManager.instance.PlaySFXMusic(SFXAudioType.GetItem);
-        // 만약 스테이지 모드라면 얻는 아이템은 반드시 돋보기
-        if(StageInformationManager.getGameMode() == GameModeType.stage)
-        {
-            magGlassCount += 1;
-            EventManager.instance.Item_Count_Change_Invoke_Event(EventType.Item_Obtain, Item.Mag_Glass, magGlassCount,1);
-            return;
-        }
-
 
         if(isUsable)
         {
-            // 돋보기가 가장 확률이 높고, 다음이 성수, 그 다음이 포션으로 하자
             int randNum = UnityEngine.Random.Range(1, 11);
             Item randUsableItem;
             if(randNum <= 5) // 1~5 : 돋보기
@@ -838,10 +727,6 @@ public class StageManager : MonoBehaviour, IStageManager
             }   
 
             int obtainCount = 1;
-            obtainCount += EquippedItem.canObtainPlusItem(Item.ALL_PercentageUP);
-            obtainCount += EquippedItem.canObtainPlusItem(randUsableItem);
-
-
 
             switch(randUsableItem)
             {
@@ -915,12 +800,9 @@ public class StageManager : MonoBehaviour, IStageManager
     public void DungeonInitialize(int parawidth = DefaultX ,  int paraheight = DefaultY, Difficulty difficulty = Difficulty.Hard, int maxHeart = 3,  int currentHeart = 2, int potionCount = 0, int magGlassCount = 0, int holyWaterCount = 0, int totalTime = 300)
     {
         isDungeon = StageInformationManager.isnextStageDungeon;
-        if(isTutorial)
-        {
-            GameAudioManager.instance.PlayBackGroundMusic(BackGroundAudioType.Tutorial);
-        }else
-        {
-            switch(StageInformationManager.currentStagetype)
+
+
+        switch(StageInformationManager.currentStagetype)
             {
                 case 0 :
                     GameAudioManager.instance.PlayBackGroundMusic(BackGroundAudioType.Cave);
@@ -932,8 +814,6 @@ public class StageManager : MonoBehaviour, IStageManager
                     GameAudioManager.instance.PlayBackGroundMusic(BackGroundAudioType.Ruin);
                     break;
             }
-            
-        }
         
         
         EventManager.instance.UpdateLeftPanel_Invoke_Event();
@@ -952,14 +832,11 @@ public class StageManager : MonoBehaviour, IStageManager
 
         startX = -1;
         startY = -1;
-        if(isTutorial)
-        {
-            width = StageInformationManager.tutorialWidth[StageInformationManager.currentStageIndex];
-            height = StageInformationManager.tutorialHeight[StageInformationManager.currentStageIndex];
-        }else{
-            width = parawidth;
-            height = paraheight;
-        }
+
+
+        width = parawidth;
+        height = paraheight;
+
 
         Debug.Log("width : " + width + " height : " + height);
 
@@ -975,9 +852,9 @@ public class StageManager : MonoBehaviour, IStageManager
             this.holyWaterCount = holyWaterCount;
         }else
         {
-            this.potionCount = potionCount + EquippedItem.Heart_StageBonus + StageInformationManager.plusPotion_Default_perStage[difficultytemp];
-            this.magGlassCount = magGlassCount + EquippedItem.Glass_StageBonus + StageInformationManager.plusMag_Default_perStage[difficultytemp];
-            this.holyWaterCount = holyWaterCount+ EquippedItem.Holy_StageBonus + StageInformationManager.plusHoly_Default_perStage[difficultytemp];
+            this.potionCount = potionCount + StageInformationManager.plusPotion_Default_perStage[difficultytemp];
+            this.magGlassCount = magGlassCount + StageInformationManager.plusMag_Default_perStage[difficultytemp];
+            this.holyWaterCount = holyWaterCount + StageInformationManager.plusHoly_Default_perStage[difficultytemp];
         }
 
         EventManager.instance.Reduce_HeartInvokeEvent(currentHeart, maxHeart);
@@ -1003,7 +880,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
         CameraSize_Change.ChangeCameraSizeFit();
 
-        timerCoroutine = StartCoroutine(StartTimer(totalTime + EquippedItem.Time_StageBonus + StageInformationManager.DefaultTimeperStage[(int)StageInformationManager.difficulty])); 
+        timerCoroutine = StartCoroutine(StartTimer(totalTime + StageInformationManager.DefaultTimeperStage[(int)StageInformationManager.difficulty])); 
 
         PlayerManager.instance.SetPlayerPositionStart();
 
@@ -1012,19 +889,10 @@ public class StageManager : MonoBehaviour, IStageManager
 
     IEnumerator StartTimer(int totalTime)
     {
-        
-        if(isTutorial && tutorialStage < 4)
-        {
-            this.totalTime = 0;
-            timeElapsed = 0;
-            EventManager.instance.TimerInvokeEvent(timeElapsed, timeLeft);
-            yield break;
-        }else
-        {
-            this.totalTime = totalTime;
-            timeElapsed = 0;
-            EventManager.instance.TimerInvokeEvent(timeElapsed, timeLeft);
-        }
+
+        this.totalTime = totalTime;
+        timeElapsed = 0;
+        EventManager.instance.TimerInvokeEvent(timeElapsed, timeLeft);
 
         while(timeLeft > 0)
         {
@@ -1133,34 +1001,6 @@ public class StageManager : MonoBehaviour, IStageManager
     {
         CalcStartArea(width, height, out startX, out startY);
 
-        if(isTutorial && tutorialStage < 4)
-        {
-            switch (tutorialStage)
-            {
-                case 1 : 
-                    mineTreasureArray = (int[,])StageInformationManager.tutorial1Stageinform.Clone();
-                    mineCount = StageInformationManager.tutorialmineCount[tutorialStage-1];
-                    treasureCount = StageInformationManager.tutorialtreasureCount[tutorialStage-1];
-                    break;
-                case 2 :
-                    mineTreasureArray = (int[,])StageInformationManager.tutorial2Stageinform.Clone();
-                    mineCount = StageInformationManager.tutorialmineCount[tutorialStage-1];
-                    treasureCount = StageInformationManager.tutorialtreasureCount[tutorialStage-1];
-                    break;
-                case 3 :
-                    mineTreasureArray = (int[,])StageInformationManager.tutorial3Stageinform.Clone();
-                    mineCount = StageInformationManager.tutorialmineCount[tutorialStage-1];
-                    treasureCount = StageInformationManager.tutorialtreasureCount[tutorialStage-1];
-                    break;
-            }
-
-            EventManager.instance.InvokeEvent(EventType.MineAppear, mineCount);
-            EventManager.instance.InvokeEvent(EventType.TreasureAppear, treasureCount);
-
-            return;
-        }
-
-
         mineTreasureArray = new int[height, width];
         int totalBockNum = height * width;
 
@@ -1256,8 +1096,6 @@ public class StageManager : MonoBehaviour, IStageManager
     {
         if(isGameOver)
         {
-            EquippedItem.ClearEquippedItem();
-
             if(isNowInputtingItem)
             {
                 EventManager.instance.ItemPanelShow_Invoke_Event(Vector3Int.zero, false);

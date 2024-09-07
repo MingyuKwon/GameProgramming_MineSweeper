@@ -103,7 +103,6 @@ public class InputManager : MonoBehaviour
         bool isDownButton1 = Input.GetMouseButtonDown(1);
         bool isDownButton2 = Input.GetMouseButtonDown(2);
         bool isDownButton3 = Input.GetMouseButtonDown(3);
-        bool isDownButton4 = Input.GetMouseButtonDown(4);
 
 
         if(isDownButton2)
@@ -114,17 +113,6 @@ public class InputManager : MonoBehaviour
                 StageManager.instance?.ItemPanelShow(false);
             }
             
-        }
-
-        if(isDownButton4)
-        {
-            String str = EquippedItem.playerEquippedItem[0].ToString() + "\n" +
-            EquippedItem.playerEquippedItem[1].ToString() + "\n" +
-            EquippedItem.playerEquippedItem[2].ToString() + "\n" +
-            EquippedItem.playerEquippedItem[3].ToString() + "\n" +
-            EquippedItem.playerEquippedItem[4].ToString() + "\n";
-            Debug.Log(str);
-        
         }
 
         if(isDownButton3)

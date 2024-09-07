@@ -115,7 +115,7 @@ public class InGameUIAniimation : MonoBehaviour
 
     public void GameOverAnimation(bool isGameOver, GameOver_Reason reason){
 
-        restartButton.SetActive(!StageManager.instance.isTutorial);
+        restartButton.SetActive(true);
         if(isGameOver)
         {
             switch(reason)
@@ -177,13 +177,6 @@ public class InGameUIAniimation : MonoBehaviour
 
     private void Set_BIG_ITEM_UI_Filter()
     {
-        if(EquippedItem.nextObtainItem == Item.None)
-        {
-            Debug.LogError("Item.None is Obtained");
-        }else{
-            SetItem_Use_Obtain_Flag(EquippedItem.nextObtainItem, 0);
-        }
-        
         animator.SetTrigger("Big Treasure Find");
     }
 

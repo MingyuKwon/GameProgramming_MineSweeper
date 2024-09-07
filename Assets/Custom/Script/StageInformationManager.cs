@@ -23,39 +23,7 @@ public class StageInformationManager
     public static int[] StageModestageHeight = {10, 18, 23};
     public static int[] StageModestageWidth = {15, 22, 35};
     
-
-    public static float[] noItemRatio = {0.1f,0.2f,0.3f};
-
-    public static int[] tutorialWidth = {5,5,7,9};
-    public static int[] tutorialHeight = {5,5,7,9};
-
-    public static int[,] tutorial1Stageinform = {
-                        {0,0,0,-1,-2},
-                        {0,1,1,1,0},
-                        {0,1,1,1,0},
-                        {-1,1,1,1,0},
-                        {-2,0,0,-2,0}, 
-                    };
-
-    public static int[,] tutorial2Stageinform = {
-                        {-2,-1,0,-1,-1},
-                        {-2,1,1,1,-1},
-                        {-1,1,1,1,-1},
-                        {-1,1,1,1,-1},
-                        {-2,0,0,-2,-2}, 
-                    };
-    public static int[,] tutorial3Stageinform = {
-                        {-1,-2,-1,0,0,0,-1},
-                        {-2,0,0,0,-2,-2,0},
-                        {-2,-1,1,1,1,-2,0},
-                        {0,0,1,1,1,0,0},
-                        {-1,0,1,1,1,0,-1},
-                        {-1,0,0,0,-2,0,0},
-                        {-1,-2,0,0,0,-2,0},
-                    };
-
-    public static int[] tutorialmineCount = {2,8,8};
-    public static int[] tutorialtreasureCount = {3,5,9};
+    public static float[] noItemRatio = {0.05f,0.07f,0.1f};
 
     public static int[,] stageWidthMin = 
     {
@@ -84,7 +52,7 @@ public class StageInformationManager
 
     public static int DefaultTimeforEntireGame = 100;
     
-    public static int[] DefaultTrapDamage = {1, 1, 2};
+    public static int[] DefaultTrapDamage = {1, 1, 1};
 
     public static int[] plusPotion_byItem_perStage = {3,2,2};
     public static int[] plusMag_byItem_perStage = {4,4,4};
@@ -104,12 +72,8 @@ public class StageInformationManager
 
     private static int MaxHeartDefault = 3;
     private static int CurrentHeartDefault = 3;
-
+    
     private static GameModeType gameMode = GameModeType.stage;
-    public static void changeGameMode(GameModeType gM)
-    {
-        gameMode = gM;
-    }
 
     public static GameModeType getGameMode()
     {
@@ -124,11 +88,6 @@ public class StageInformationManager
         currentStageIndex = paras[1];
         setHearts(paras[2], paras[3]);
         setUsableItems(paras[4],paras[5],paras[6]);
-        EquippedItem.playerEquippedItem[0] = (Item)paras[7]; 
-        EquippedItem.playerEquippedItem[1] = (Item)paras[8]; 
-        EquippedItem.playerEquippedItem[2] = (Item)paras[9]; 
-        EquippedItem.playerEquippedItem[3] = (Item)paras[10]; 
-        EquippedItem.playerEquippedItem[4] = (Item)paras[11];
         difficulty = (Difficulty)paras[12];
 
         NexttotalTime = paras[13];
@@ -202,7 +161,6 @@ public class StageInformationManager
 
     public static void SetDataInitialState()
     {
-        EquippedItem.ClearEquippedItem();
         currentStageIndex = 0;
         isnextStageDungeon = true;
         NextWidth = -1;  
