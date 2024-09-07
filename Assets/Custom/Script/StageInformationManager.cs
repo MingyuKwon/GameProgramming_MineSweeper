@@ -7,6 +7,8 @@ public class StageInformationManager
     public static float hardMineRatio = 0.23f;
     public static float professionalMineRatio = 0.28f;
 
+
+    // 이건 stage 모드에서의 기본 제공 돋보기와 시간
     public static int[,] StageMagItemAmount = {
         {10, 12, 14},
         {20, 25, 30},
@@ -18,39 +20,24 @@ public class StageInformationManager
         {500, 450, 400},
     };
 
+
     public static float[] StageModemineToTreasureRatio = {0.4f, 0.35f, 0.3f};
     public static int[] StageModestageHeight = {10, 18, 23};
     public static int[] StageModestageWidth = {15, 22, 35};
-    
     public static float[] noItemRatio = {0.05f,0.07f,0.1f};
 
-    public static int[,] stageWidthMin = 
-    {
-        {8 , 9, 10, 11, 12,13},
-        {15, 16, 17, 18, 19,20},
-        {28 , 29, 30, 31, 32,33},
-    };
-    public static int[,] stageWidthMax = 
-    {
-        {10 , 11, 12, 13, 14,15},
-        {17 , 18, 19, 20, 21,22},
-        {30 , 31, 32, 33, 34,35},
-    };
-    
-    public static int[,] stageHeightMin = {
-        {8 , 8, 8, 8, 8,8},
-        {14 , 14, 15, 15, 16,16},
-        {16 , 16, 16, 16, 17,17},
-    };
 
     public static int[] DefaultTrapDamage = {1, 1, 1};
+
 
     private static int MaxHeartDefault = 3;
     private static int CurrentHeartDefault = 3;
 
+
     public static int currentStagetype = 0;
     public static int currentStageIndex = 0;
     public static Difficulty difficulty = Difficulty.Normal;
+
 
     private static int NextmaxHeart = -1;  
     private static int NextcurrentHeart = -1; 
@@ -115,9 +102,5 @@ public class StageInformationManager
         NextpotionCount = -1;
         NextmagGlassCount = -1;
         NextholyWaterCount = -1;
-
-        InputManager.itemLock =false;
-        InputManager.shovelLock =false;
-        InputManager.flagLock =false;
     }
 }

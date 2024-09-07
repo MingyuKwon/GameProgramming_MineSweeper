@@ -89,10 +89,6 @@ public class InputManager : MonoBehaviour
 
         inputControlStack.Push(type);
     }
-
-    public static bool itemLock = false;
-    public static bool flagLock = false;
-    public static bool shovelLock = false;
     
     private void Update() {
         if(StageManager.isStageInputBlocked) return;
@@ -104,7 +100,6 @@ public class InputManager : MonoBehaviour
         bool isDownButton2 = Input.GetMouseButtonDown(2);
         bool isDownButton3 = Input.GetMouseButtonDown(3);
 
-
         if(isDownButton2)
         {
             if(StageManager.isNowInputtingItem)
@@ -112,7 +107,6 @@ public class InputManager : MonoBehaviour
                 input2Ok = true;
                 StageManager.instance?.ItemPanelShow(false);
             }
-            
         }
 
         if(isDownButton3)
@@ -124,13 +118,13 @@ public class InputManager : MonoBehaviour
 
         if(isDownButton0)
         {
-            StageManager.instance?.MoveOrShovelOrInteract(shovelLock);
+            StageManager.instance?.MoveOrShovelOrInteract(false);
         }
 
-        if(isDownButton1 && !flagLock)
+        if(isDownButton1)
         {
             StageManager.instance?.SetFlag();
-        }else if(isDownButton2 && !itemLock)
+        }else if(isDownButton2)
         {
             if(input2Ok) return;
 
