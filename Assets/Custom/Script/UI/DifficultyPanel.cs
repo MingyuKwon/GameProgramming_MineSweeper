@@ -123,13 +123,4 @@ public class DifficultyPanel : MonoBehaviour
         StageInformationManager.currentStagetype = num;
         UpdateTotal();
     }
-
-    public void ChangeModeNum(int num)
-    {
-        StageInformationManager.changeGameMode((GameModeType)num); 
-        Panels[0].SetActive(false);
-        Panels[1].SetActive(false);
-        Panels[num].SetActive(true);
-        UpdateTotal();
-    }
 }
