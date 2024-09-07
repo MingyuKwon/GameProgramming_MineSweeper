@@ -716,46 +716,6 @@ public class StageManager : MonoBehaviour, IStageManager
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-    public void RestPlaceInitialize(Vector3Int treasurePosition, int maxHeart = 9,  int currentHeart = 1, int potionCount = 5, int magGlassCount = 20, int holyWaterCount = 5, int totalTime = 300)
-    {
-        if(StageInformationManager.currentStageIndex < 5 && !(SceneManager.GetActiveScene().name == "Tutorial Last"))
-        {
-            GameAudioManager.instance.PlayBackGroundMusic(BackGroundAudioType.RestRoom);
-        }else
-        {
-            GameAudioManager.instance.PlayBackGroundMusic(BackGroundAudioType.LastRoom);
-        }
-
-        EventManager.instance.UpdateLeftPanel_Invoke_Event();
-
-        EventManager.instance.InvokeEvent(EventType.None, 0);
-
-        BigTreasurePosition = treasurePosition;
-
-        isNowInitializing = true;
-
-        this.maxHeart = maxHeart;
-        this.currentHeart = currentHeart;
-        EventManager.instance.Reduce_HeartInvokeEvent(currentHeart, maxHeart);
-
-        this.potionCount = potionCount;
-        this.magGlassCount = magGlassCount;
-        this.holyWaterCount = holyWaterCount;
-        EventManager.instance.Item_Count_Change_Invoke_Event(EventType.Item_Obtain, Item.Potion, potionCount);
-        EventManager.instance.Item_Count_Change_Invoke_Event(EventType.Item_Obtain, Item.Mag_Glass, magGlassCount);
-        EventManager.instance.Item_Count_Change_Invoke_Event(EventType.Item_Obtain, Item.Holy_Water, holyWaterCount);
-
-        this.totalTime = totalTime;
-        EventManager.instance.TimerInvokeEvent(0, totalTime);
-
-        isNowInitializing = false;
-        PlayerManager.instance.SetPlayerPositionStart();    
-
-        EventManager.instance.StairOpen_Invoke_Event(); 
-    }
-
-
     [Button]
     public void DungeonInitialize(int parawidth = DefaultX ,  int paraheight = DefaultY, Difficulty difficulty = Difficulty.Hard, int maxHeart = 3,  int currentHeart = 2, int potionCount = 0, int magGlassCount = 0, int holyWaterCount = 0, int totalTime = 300)
     {

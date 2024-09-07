@@ -149,24 +149,11 @@ public class EventManager : MonoBehaviour
         UpdateLeftPanelEvent.Invoke();
     }
 
-    public Action StairOpenEvent;
-    public void StairOpen_Invoke_Event()
-    {
-        StairOpenEvent?.Invoke();
-        GameAudioManager.instance.PlaySFXMusic(SFXAudioType.GateOpen);
-    }
-
     public Action BackToMainMenuEvent;
     public void BackToMainMenu_Invoke_Event()
     {
         BackToMainMenuEvent?.Invoke();
         StageInformationManager.currentStageIndex = 0;
-    }
-
-    public Action<string[] , bool , int , int > showNoticeUIEvent;
-    public void Invoke_showNoticeUIEvent(string[] texts, bool isTyping, int panelWidth, int panelHeight)
-    {
-        showNoticeUIEvent?.Invoke(texts,isTyping, panelWidth, panelHeight);
     }
 
     public Action NoticeCountIncreaseEvent;
@@ -175,13 +162,7 @@ public class EventManager : MonoBehaviour
         NoticeCountIncreaseEvent?.Invoke();
     }
 
-    public Action TutorialTextTriggerEvent;
-    public void Invoke_TutorialTextTriggerEvent()
-    {
-        TutorialTextTriggerEvent?.Invoke();
-    }
     #endregion
-
 
     public static EventManager instance = null;
     public static bool isAnimationPlaying{
