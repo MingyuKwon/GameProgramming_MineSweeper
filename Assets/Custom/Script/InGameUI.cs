@@ -553,8 +553,10 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             difficultyText.text = KoreanDifficulty[difficulty];
             stageDifficulty.text = KoreanDifficulty[difficulty];
             stageType.text = KoreanStage[stagetype];
-            width.text = "너비 : " + StageInformationManager.NextWidth.ToString();
-            height.text = "높이 : " + StageInformationManager.NextHeight.ToString();
+
+
+            width.text = "너비 : " + StageInformationManager.StageModestageWidth[stagetype].ToString();
+            height.text = "높이 : " + StageInformationManager.StageModestageHeight[stagetype].ToString();
             stageIndex.text = "스테이지";
 
             
@@ -565,8 +567,8 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             difficultyText.text = EnglishDifficulty[difficulty];
             stageDifficulty.text = EnglishDifficulty[difficulty];
             stageType.text = EnglishStage[stagetype];
-            width.text = "Width : " + StageInformationManager.NextWidth.ToString();
-            height.text = "Height : " + StageInformationManager.NextHeight.ToString();
+            width.text = "Width : " + StageInformationManager.StageModestageWidth[stagetype].ToString();
+            height.text = "Height : " + StageInformationManager.StageModestageHeight[stagetype].ToString();
             stageIndex.text = "STAGE";
 
             

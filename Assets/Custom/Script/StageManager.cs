@@ -12,7 +12,6 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour, IStageManager
 {   
     public static StageManager instance;
-    public static bool isDungeon = true;
     const int DefaultX = 18;
     const int DefaultY = 12;
 
@@ -140,7 +139,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
     bool holyWaterEnable{
         get{
-            return holyWaterCount > 0 && isFoucusOnObstacle && isDungeon;
+            return holyWaterCount > 0 && isFoucusOnObstacle;
         }
     }
     #endregion
@@ -201,29 +200,6 @@ public class StageManager : MonoBehaviour, IStageManager
 
     private void OnDestroy() {
         instance = null;
-
-        if(LoadingInformation.loadingSceneName == "Main Menu") 
-        {
-            return;
-        }
-        
-
-        if(!StageInformationManager.isnextStageDungeon) // 다음이 던전인 경우
-        {
-            StageInformationManager.currentStageIndex++;
-            int min = StageInformationManager.stageWidthMin[(int)StageInformationManager.difficulty,StageInformationManager.currentStageIndex];
-            int max = StageInformationManager.stageWidthMax[(int)StageInformationManager.difficulty,StageInformationManager.currentStageIndex];
-            
-            StageInformationManager.NextWidth = UnityEngine.Random.Range(min, max+1); 
-            StageInformationManager.NextHeight = StageInformationManager.stageHeightMin[(int)StageInformationManager.difficulty,StageInformationManager.currentStageIndex];
-            
-        }
-
-        StageInformationManager.setHearts(maxHeart, currentHeart); 
-        StageInformationManager.setUsableItems(potionCount,magGlassCount,holyWaterCount);
-        StageInformationManager. NexttotalTime = timeLeft;
-
-        StageInformationManager.isnextStageDungeon = !StageInformationManager.isnextStageDungeon;
     }
 
     private void Start() {
@@ -232,8 +208,6 @@ public class StageManager : MonoBehaviour, IStageManager
         int difficulty = (int)StageInformationManager.difficulty;        
         int stageType = StageInformationManager.currentStagetype;
 
-        StageInformationManager.NextWidth = StageInformationManager.StageModestageWidth[stageType];
-        StageInformationManager.NextHeight= StageInformationManager.StageModestageHeight[stageType];
         StageInformationManager.setHearts(3,3); 
         StageInformationManager.setUsableItems(0,StageInformationManager.StageMagItemAmount[stageType,difficulty] , 0);
         StageInformationManager.NexttotalTime = StageInformationManager.StageModeTime[stageType,difficulty];
@@ -241,7 +215,7 @@ public class StageManager : MonoBehaviour, IStageManager
         int[] usableItems = StageInformationManager.getUsableItems();
         int[] hearts = StageInformationManager.getHearts();
 
-        DungeonInitialize(StageInformationManager.NextWidth, StageInformationManager.NextHeight ,
+        DungeonInitialize(StageInformationManager.StageModestageWidth[stageType], StageInformationManager.StageModestageHeight[stageType] ,
         StageInformationManager.difficulty ,hearts[0], hearts[1], 
         usableItems[0], usableItems[1], usableItems[2], 
         StageInformationManager. NexttotalTime);
@@ -258,7 +232,7 @@ public class StageManager : MonoBehaviour, IStageManager
                 if(!interactOkflag) return;
 
                 isNowInputtingItem = true;
-                EventManager.instance.ItemPanelShow_Invoke_Event(currentFocusPosition, true, holyWaterEnable, isFoucusOnObstacle && isDungeon, magGlassEnable , potionEnable);
+                EventManager.instance.ItemPanelShow_Invoke_Event(currentFocusPosition, true, holyWaterEnable, isFoucusOnObstacle, magGlassEnable , potionEnable);
                 GameAudioManager.instance.PlaySFXMusic(SFXAudioType.itemMenuShow);  
 
             }
@@ -289,12 +263,8 @@ public class StageManager : MonoBehaviour, IStageManager
         }else
         {
             if(isNowInputtingItem) return;
+            if(hasTrapInPosition(currentFocusPosition)) return;
 
-            if(isDungeon)
-            {
-                if(hasTrapInPosition(currentFocusPosition)) return;
-            }
-            
             InputManager.InputEvent.Invoke_Move(currentFocusPosition);
         }
     }
@@ -305,12 +275,9 @@ public class StageManager : MonoBehaviour, IStageManager
         if(isNowInitializing) return;
 
         SetFocus();
+        SetPlayer_Overlay();
+        SetInteract_Ok();
 
-        if(isDungeon)
-        {
-            SetPlayer_Overlay();
-            SetInteract_Ok();
-        }
         
     }
 
@@ -624,7 +591,6 @@ public class StageManager : MonoBehaviour, IStageManager
 
     private void ChangeTotalToSeperate(Vector3Int cellPos)
     {
-        if(!isDungeon) return;
         Vector3Int arrayPos = ChangeCellPosToArrayPos(cellPos);
         if(CheckHasObstacle(cellPos)) return; // 해당 위치에 장애물 타일이 있으면 그 자리에서 반환
         if(totalNumArray[arrayPos.y, arrayPos.x] == 0) return; // 만약 해당 위치가 0이어도 반환 (써도 의미가 없음)
@@ -765,7 +731,6 @@ public class StageManager : MonoBehaviour, IStageManager
 
         EventManager.instance.InvokeEvent(EventType.None, 0);
 
-        isDungeon = StageInformationManager.isnextStageDungeon;
         BigTreasurePosition = treasurePosition;
 
         isNowInitializing = true;
@@ -794,8 +759,6 @@ public class StageManager : MonoBehaviour, IStageManager
     [Button]
     public void DungeonInitialize(int parawidth = DefaultX ,  int paraheight = DefaultY, Difficulty difficulty = Difficulty.Hard, int maxHeart = 3,  int currentHeart = 2, int potionCount = 0, int magGlassCount = 0, int holyWaterCount = 0, int totalTime = 300)
     {
-        isDungeon = StageInformationManager.isnextStageDungeon;
-
         switch(StageInformationManager.currentStagetype)
             {
                 case 0 :
@@ -867,7 +830,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
         CameraSize_Change.ChangeCameraSizeFit();
 
-        timerCoroutine = StartCoroutine(StartTimer(totalTime + StageInformationManager.DefaultTimeperStage[(int)StageInformationManager.difficulty])); 
+        timerCoroutine = StartCoroutine(StartTimer(totalTime)); 
 
         PlayerManager.instance.SetPlayerPositionStart();
 
@@ -1087,30 +1050,11 @@ public class StageManager : MonoBehaviour, IStageManager
             if(timerCoroutine != null) StopCoroutine(timerCoroutine);
             reStartEnable = true;
             timerCoroutine = null;
-        }else
-        {
-            StageInformationManager.currentStageIndex = 0;
-            StageInformationManager.NextWidth = StageInformationManager.stageWidthMin[(int)StageInformationManager.difficulty,StageInformationManager.currentStageIndex];
-            StageInformationManager.NextHeight= StageInformationManager.stageHeightMin[(int)StageInformationManager.difficulty,StageInformationManager.currentStageIndex];
-                
-            StageInformationManager.setHearts(); 
-            StageInformationManager.setUsableItems(); 
-            StageInformationManager.NexttotalTime = StageInformationManager.DefaultTimeforEntireGame;
-            EventManager.instance.UpdateRightPanel_Invoke_Event();
-
-            int[] usableItems = StageInformationManager.getUsableItems();
-            int[] hearts = StageInformationManager.getHearts();
-            
-            DungeonInitialize(StageInformationManager.NextWidth, StageInformationManager.NextHeight ,StageInformationManager.difficulty ,hearts[0], hearts[1], usableItems[0], usableItems[1], usableItems[2], StageInformationManager. NexttotalTime);
-            stageInputBlock =0;
         }
         
     }
 
-    public bool hasTrapInPosition(Vector3Int position){
-
-        if(!isDungeon) return false;
-        
+    public bool hasTrapInPosition(Vector3Int position){        
         Vector3Int arrayPos = ChangeCellPosToArrayPos(position);
         if(mineTreasureArray[arrayPos.y, arrayPos.x] == -1){
             return true;

@@ -6,7 +6,6 @@ public class StageInformationManager
     public static float normalMineRatio = 0.18f;
     public static float hardMineRatio = 0.23f;
     public static float professionalMineRatio = 0.28f;
-    public static float mineToTreasureRatio = 0.5f;
 
     public static int[,] StageMagItemAmount = {
         {10, 12, 14},
@@ -43,44 +42,15 @@ public class StageInformationManager
         {14 , 14, 15, 15, 16,16},
         {16 , 16, 16, 16, 17,17},
     };
-    public static int[,] stageHeightMax = {
-        {9 , 9, 9, 10, 10,10},
-        {16 , 16, 16, 17, 17,18},
-        {18 , 19, 20, 21, 22,23},
-    };
 
-
-    public static int DefaultTimeforEntireGame = 100;
-    
     public static int[] DefaultTrapDamage = {1, 1, 1};
-
-    public static int[] plusPotion_byItem_perStage = {3,2,2};
-    public static int[] plusMag_byItem_perStage = {4,4,4};
-    public static int[] plusHoly_byItem_perStage = {4,3,3};
-    public static int[] plusTime_byItem_perStage = {60,50,40};
-
-    public static int[] plusPotion_Default_perStage = {4,2,0};
-    public static int[] plusMag_Default_perStage = {6,7,8};
-    public static int[] plusHoly_Default_perStage = {4,2,0};
-    public static int[] DefaultTimeperStage = {150, 200, 250};
-
-    public static float[] item_obtain_Up_Percentage = {0.3f,0.3f,0.4f};
-
-    public static int Potion_Default = 2;
-    public static int Mag_Default = 2;
-    public static int Holy_Default = 5;
 
     private static int MaxHeartDefault = 3;
     private static int CurrentHeartDefault = 3;
-    
 
     public static int currentStagetype = 0;
     public static int currentStageIndex = 0;
-    public static bool isnextStageDungeon = true;
     public static Difficulty difficulty = Difficulty.Normal;
-
-    public static int NextWidth = -1;  
-    public static int NextHeight = -1;  
 
     private static int NextmaxHeart = -1;  
     private static int NextcurrentHeart = -1; 
@@ -124,9 +94,9 @@ public class StageInformationManager
     {
         if(potionCount < 0) // 만약 인수 안 준 경우 -> 기본 값으로 초기화
         {
-            NextpotionCount = Potion_Default;
-            NextmagGlassCount = Mag_Default;
-            NextholyWaterCount = Holy_Default;
+            NextpotionCount = 0;
+            NextmagGlassCount = 0;
+            NextholyWaterCount = 0;
         }else // 실제 값이 들어오면 -> 그 값으로 초기화
         {
             NextpotionCount = potionCount;
@@ -140,9 +110,6 @@ public class StageInformationManager
     public static void SetDataInitialState()
     {
         currentStageIndex = 0;
-        isnextStageDungeon = true;
-        NextWidth = -1;  
-        NextHeight = -1;  
         NextmaxHeart = -1;  
         NextcurrentHeart = -1; 
         NextpotionCount = -1;
