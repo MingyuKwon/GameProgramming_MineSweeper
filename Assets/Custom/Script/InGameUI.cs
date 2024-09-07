@@ -16,20 +16,13 @@ public class InGameUI : MonoBehaviour, AlertCallBack
     public TextMeshProUGUI stageDifficulty;
     public TextMeshProUGUI stageType;
     public TextMeshProUGUI stageIndex;
-
     public TextMeshProUGUI trapDamage;
-    public TextMeshProUGUI potionPlus;
-    public TextMeshProUGUI magGlassPlus;
-    public TextMeshProUGUI holyWaterPlus;
-    public TextMeshProUGUI TimePlus;
     public TextMeshProUGUI left;
     public TextMeshProUGUI item;
-    public TextMeshProUGUI stagePer;
     public TextMeshProUGUI[] buttonTexts;
 
     [Space]
     public TextMeshProUGUI[] usableItemExplain;
-    public TextMeshProUGUI[] equipppedItemExplain;
 
     [Space]
     public TextMeshProUGUI leftTimeText;
@@ -54,8 +47,6 @@ public class InGameUI : MonoBehaviour, AlertCallBack
     [Space]
     [Header("Equipped Panel")]
     public Sprite[] EquippedItemSprites;
-    public Image[] EquippedItemImages;
-
 
     [Space]
     [Header("Transforms")]
@@ -187,11 +178,6 @@ public class InGameUI : MonoBehaviour, AlertCallBack
         itemButtons = totalItemPanel.GetComponentsInChildren<Button>();
         itemimages = totalItemPanel.GetComponentsInChildren<Image>();
 
-        for(int i=0; i<equipppedItemExplain.Length; i++)
-            {
-                equipppedItemExplain[i].text = "";
-            }
-
         usableItemExplain[0].text = KoreanUsableText[0];
         usableItemExplain[1].text = KoreanUsableText[1];
         usableItemExplain[2].text = KoreanUsableText[2];
@@ -199,11 +185,6 @@ public class InGameUI : MonoBehaviour, AlertCallBack
 
     private void SetLanguageTexts()
     {
-        for(int i=0; i<equipppedItemExplain.Length; i++)
-        {
-            equipppedItemExplain[i].text = "";
-        }
-
         if(LanguageManager.currentLanguage == "English")
         {
             usableItemExplain[0].text = EnglishUsableText[0];
@@ -504,11 +485,6 @@ public class InGameUI : MonoBehaviour, AlertCallBack
         string[] EnglisButton = {"Minimap", "Menu", "Restart", "Tutorial", "Setting", "Main Menu"};
         string[] KoreanButton = {"미니맵", "메뉴", "재시작", "튜토리얼", "환경설정", "메인메뉴"};
         string[] tempButtonText = EnglisButton;
-        for(int i=0; i<5; i++)
-        {
-            EquippedItemImages[i].sprite = EquippedItemSprites[0];
-            equipppedItemExplain[i].text = "";
-        }
 
         if(LanguageManager.currentLanguage == "Korean")
         {
@@ -561,7 +537,6 @@ public class InGameUI : MonoBehaviour, AlertCallBack
 
             
             left.text = "남은 수";
-            stagePer.text = "스테이지 마다";
         }else if(LanguageManager.currentLanguage == "English")
         {
             difficultyText.text = EnglishDifficulty[difficulty];
@@ -573,17 +548,11 @@ public class InGameUI : MonoBehaviour, AlertCallBack
 
             
             left.text = "Left";
-            stagePer.text = "stage per";
         }
         
         trapDamage.text = "X" + StageInformationManager.DefaultTrapDamage[difficulty].ToString();
-        
-        potionPlus.text = "+" +0.ToString();
-        magGlassPlus.text = "+" + 0.ToString();
-        holyWaterPlus.text = "+" + 0.ToString();
-        TimePlus.text = "+" +  0.ToString();
 
-        
+
         SetLanguageTexts();
     }
 
