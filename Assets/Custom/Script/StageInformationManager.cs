@@ -73,33 +73,11 @@ public class StageInformationManager
     private static int MaxHeartDefault = 3;
     private static int CurrentHeartDefault = 3;
     
-    private static GameModeType gameMode = GameModeType.stage;
-
-    public static GameModeType getGameMode()
-    {
-        return gameMode;
-    }
-
-    public static void setPlayerData(int[] paras)
-    {
-        if(paras == null || paras[2] == -1) return;
-
-        currentStagetype = paras[0];
-        currentStageIndex = paras[1];
-        setHearts(paras[2], paras[3]);
-        setUsableItems(paras[4],paras[5],paras[6]);
-        difficulty = (Difficulty)paras[12];
-
-        NexttotalTime = paras[13];
-        NextWidth = paras[14];
-        NextHeight = paras[15];
-    }
 
     public static int currentStagetype = 0;
     public static int currentStageIndex = 0;
     public static bool isnextStageDungeon = true;
     public static Difficulty difficulty = Difficulty.Normal;
-    public static Vector3Int treasurePosition = new Vector3Int(-4,-1,0);
 
     public static int NextWidth = -1;  
     public static int NextHeight = -1;  

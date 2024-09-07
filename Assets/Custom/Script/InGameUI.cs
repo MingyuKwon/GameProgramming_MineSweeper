@@ -141,7 +141,7 @@ public class InGameUI : MonoBehaviour, AlertCallBack
 
     public void GameRestartMenu()
     {
-        MainMenu.RestartManageClass.restartGameModeType = StageInformationManager.getGameMode();
+        MainMenu.RestartManageClass.restartGameModeType = GameModeType.stage;
         GoBackMainMenu();
     }
 

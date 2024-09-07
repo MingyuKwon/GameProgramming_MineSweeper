@@ -5,11 +5,8 @@ using TMPro;
 
 public enum GameModeType
 {
-    adventure = 0,
     stage = 1,
-    None = 2,
-    tutorial = 3,
-    
+    None = 2,    
 }
 
 public class MainMenu : MonoBehaviour , AlertCallBack
@@ -35,7 +32,6 @@ public class MainMenu : MonoBehaviour , AlertCallBack
     }
 
     private void OnEnable() {
-        int mode = (int)StageInformationManager.getGameMode();
         ChangeSceneNum(StageInformationManager.currentStagetype);
         StageInformationManager.SetDataInitialState();
     }
