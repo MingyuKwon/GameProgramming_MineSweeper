@@ -30371,7 +30371,6 @@ MonoBehaviour:
   - {fileID: 6453329437603722104}
   - {fileID: 2625288482592625311}
   - {fileID: 2965243821534051019}
-  - {fileID: 6986586542552113642}
   previousButton: {fileID: 1591064430110316113}
   nextButton: {fileID: 1366856277633667771}
   indexShowText: {fileID: 2612637153093582246}
@@ -30428,8 +30427,6 @@ MonoBehaviour:
   - {fileID: 8088457201269131614}
   - {fileID: 3125183021485308491}
   - {fileID: 1877718777358870865}
-  tutorial4Title: []
-  tutorial4Text: []
 --- !u!1 &8662553228817655944
 GameObject:
   m_ObjectHideFlags: 0
