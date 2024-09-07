@@ -66,8 +66,7 @@ public class InputManager : MonoBehaviour
     #region static Field
     public static InputManager instance = null;
     public static Stack<InputMode> inputControlStack = new Stack<InputMode>();
-    public static int currentInputRule = 0;
-    public static InputCheck inputCheck;
+    
     #endregion
     
     void Awake() {
@@ -89,35 +88,7 @@ public class InputManager : MonoBehaviour
         }
 
         inputControlStack.Push(type);
-        changePlayerInputRule();
     }
-
-    private static void changePlayerInputRule(int ruleNum)
-    {
-
-    }
-
-    private static void changePlayerInputRule()
-    {
-        if(inputControlStack.Count == 0)
-        {
-            return;
-        }
-
-        switch(inputControlStack.Peek())
-        {
-            case InputMode.InGame :
-                changePlayerInputRule(0);
-                break;
-            case InputMode.UI :
-                changePlayerInputRule(1);
-                break;
-        }
-    }
-
-    public static bool itemLock = false;
-    public static bool flagLock = false;
-    public static bool shovelLock = false;
     
     private void Update() {
         if(StageManager.isStageInputBlocked) return;
@@ -128,8 +99,6 @@ public class InputManager : MonoBehaviour
         bool isDownButton1 = Input.GetMouseButtonDown(1);
         bool isDownButton2 = Input.GetMouseButtonDown(2);
         bool isDownButton3 = Input.GetMouseButtonDown(3);
-        bool isDownButton4 = Input.GetMouseButtonDown(4);
-
 
         if(isDownButton2)
         {
@@ -138,18 +107,6 @@ public class InputManager : MonoBehaviour
                 input2Ok = true;
                 StageManager.instance?.ItemPanelShow(false);
             }
-            
-        }
-
-        if(isDownButton4)
-        {
-            String str = EquippedItem.playerEquippedItem[0].ToString() + "\n" +
-            EquippedItem.playerEquippedItem[1].ToString() + "\n" +
-            EquippedItem.playerEquippedItem[2].ToString() + "\n" +
-            EquippedItem.playerEquippedItem[3].ToString() + "\n" +
-            EquippedItem.playerEquippedItem[4].ToString() + "\n";
-            Debug.Log(str);
-        
         }
 
         if(isDownButton3)
@@ -161,13 +118,13 @@ public class InputManager : MonoBehaviour
 
         if(isDownButton0)
         {
-            StageManager.instance?.MoveOrShovelOrInteract(shovelLock);
+            StageManager.instance?.MoveOrShovelOrInteract(false);
         }
 
-        if(isDownButton1 && !flagLock)
+        if(isDownButton1)
         {
             StageManager.instance?.SetFlag();
-        }else if(isDownButton2 && !itemLock)
+        }else if(isDownButton2)
         {
             if(input2Ok) return;
 

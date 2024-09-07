@@ -1,5 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class TutorialLangaugeManager : MonoBehaviour
 {
@@ -11,9 +14,6 @@ public class TutorialLangaugeManager : MonoBehaviour
 
     public TextMeshProUGUI[] tutorial3Title;
     public TextMeshProUGUI[] tutorial3Text;
-
-    public TextMeshProUGUI[] tutorial4Title;
-    public TextMeshProUGUI[] tutorial4Text;
 
 
     private string[] tutorial1TitleStringEnglish = {
@@ -127,22 +127,6 @@ public class TutorialLangaugeManager : MonoBehaviour
         "보물이 없습니다 ",
         "플레이어 주변 바위에 사용가능. 바위를 아래에 있는 함정을 포함해서 제거합니다. 무제한으로 사용할 수 있는 대신, 보물을 제거하게 되면 게임 오버 입니다",
     };
-    private string[] tutorial4TitleStringKorean = {
-        "장비 아이템",
-        "아이템 설명",
-    };
-    private string[] tutorial4TextStringKorean = {
-        "스테이지를 깰 때 마다 얻을 수 있는 아이템 입니다 ",
-        "최대 체력을 3 올립니다 ",
-        "스테이지를 깰 때 지급되는 포션의 개수를 늘립니다 ",
-        "보물에서 포션을 찾을 때 얻는 개수를 늘립니다 ",
-        "스테이지를 깰 때 지급되는 성수의 개수를 늘립니다 ",
-        "보물에서 성수를 찾을 때 얻는 개수를 늘립니다 ",
-        "스테이지를 깰 때 지급되는 돋보기의 개수를 늘립니다 ",
-        "보물에서 돋보기를 찾을 때 얻는 개수를 늘립니다 ",
-        "스테이지를 깰 때 지급되는 추가시간이 증가합니다 ",
-        "보물에서 소비 아이템을 찾을 때 얻는 개수를 늘립니다 ",
-    };
 
     private void OnEnable() {
         UpdatePanel("");
@@ -166,8 +150,6 @@ public class TutorialLangaugeManager : MonoBehaviour
             tutorial2TextString  = tutorial2TextStringEnglish;
             tutorial3TitleString = tutorial3TitleStringEnglish;
             tutorial3TextString  = tutorial3TextStringEnglish;
-            tutorial4TitleString = tutorial4TitleStringEnglish;
-            tutorial4TextString  = tutorial4TextStringEnglish;
         }else
         {
             tutorial1TitleString = tutorial1TitleStringKorean;
@@ -176,8 +158,6 @@ public class TutorialLangaugeManager : MonoBehaviour
             tutorial2TextString  = tutorial2TextStringKorean;
             tutorial3TitleString = tutorial3TitleStringKorean;
             tutorial3TextString  = tutorial3TextStringKorean;
-            tutorial4TitleString = tutorial4TitleStringKorean;
-            tutorial4TextString  = tutorial4TextStringKorean;
         }
 
         for(int i=0; i<tutorial1Title.Length; i++)
@@ -203,14 +183,6 @@ public class TutorialLangaugeManager : MonoBehaviour
         for(int i=0; i<tutorial3Text.Length; i++)
         {
             tutorial3Text[i].text = tutorial3TextString[i];
-        }
-        for(int i=0; i<tutorial4Title.Length; i++)
-        {
-            tutorial4Title[i].text = tutorial4TitleString[i];
-        }
-        for(int i=0; i<tutorial4Text.Length; i++)
-        {
-            tutorial4Text[i].text = tutorial4TextString[i];
         }
 
     }
