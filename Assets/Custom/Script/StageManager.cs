@@ -397,6 +397,7 @@ public class StageManager : MonoBehaviour, IStageManager
     {
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int cellPos = TileGrid.CheckCellPosition(worldPos);
+        //cellPos = PlayerManager.instance.PlayerCellPosition;
 
         if(cellPos == currentFocusPosition) return; // 만약 포커스가 아직 바뀌지 않았다면 요청 무시
         if(grid.boundTilemap.HasTile(cellPos))  return; // 해당 위치가 필드 바깥이면 무시
