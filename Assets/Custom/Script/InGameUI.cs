@@ -113,7 +113,7 @@ public class InGameUI : MonoBehaviour, AlertCallBack
 
     public void GameRestart()
     {
-        EventManager.instance.InvokeEvent(EventType.Game_Restart, GameOver_Reason.Heart0);
+        GameRestartMenu();
     }
 
     private AlertCallBackDelgate callbackFunction;
