@@ -148,7 +148,9 @@ private void Update() {
 
         if(isDownButton0)
         {
-            StageManager.instance?.MoveOrShovelOrInteract(false);
+            //StageManager.instance?.MoveOrShovelOrInteract(false);
+
+            EventManager.instance.SetFocusEvent.Invoke(Input.mousePosition);
         }
 
         if(isDownButton1)

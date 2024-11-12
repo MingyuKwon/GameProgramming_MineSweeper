@@ -274,7 +274,6 @@ public class StageManager : MonoBehaviour, IStageManager
         if(EventSystem.current.IsPointerOverGameObject()) return;
         if(isNowInitializing) return;
 
-        SetFocus();
         SetPlayer_Overlay();
         SetInteract_Ok();
 
@@ -284,12 +283,15 @@ public class StageManager : MonoBehaviour, IStageManager
     private void OnEnable() {
         EventManager.instance.Game_Over_Event += GameOver;
         EventManager.instance.ItemUseEvent += ItemUse;
+        EventManager.instance.SetFocusEvent += SetFocus;
+
         EventManager.instance.UpdateRightPanel_Invoke_Event();
     }
 
     private void OnDisable() {
         EventManager.instance.Game_Over_Event -= GameOver;
         EventManager.instance.ItemUseEvent -= ItemUse;
+        EventManager.instance.SetFocusEvent -= SetFocus;
     }
 
     private Vector3Int[] InteractPosition1 = new Vector3Int[5]{Vector3Int.zero,Vector3Int.forward, Vector3Int.forward,Vector3Int.forward,Vector3Int.forward};
@@ -393,9 +395,9 @@ public class StageManager : MonoBehaviour, IStageManager
 
     }
 
-    private void SetFocus()
+    private void SetFocus(Vector3 mousePos)
     {
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         Vector3Int cellPos = TileGrid.CheckCellPosition(worldPos);
         //cellPos = PlayerManager.instance.PlayerCellPosition;
 
