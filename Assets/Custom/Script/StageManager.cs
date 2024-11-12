@@ -251,22 +251,55 @@ public class StageManager : MonoBehaviour, IStageManager
     {
         if(isFoucusOnObstacle)
         {
-            if(!isNearFlag) return;
             if(isNowInputtingItem) return;
             if(shovelLock) return;
 
-            EventManager.instance.ItemUse_Invoke_Event(ItemUseType.Shovel, gapBetweenPlayerFocus);
+            MoveToCurrentFocusPosition();
+            if(!isNearFlag) return;
             GameAudioManager.instance.PlaySFXMusic(SFXAudioType.Shovel);
             RemoveObstacle(currentFocusPosition);     
 
             
         }else
         {
-            if(isNowInputtingItem) return;
-            if(hasTrapInPosition(currentFocusPosition)) return;
-
-            InputManager.InputEvent.Invoke_Move(currentFocusPosition);
+            MoveToCurrentFocusPosition();
         }
+    }
+
+    public void MoveToCurrentFocusPosition()
+    {
+        if(isNowInputtingItem) return;
+        
+        Vector3Int warpTarget = currentFocusPosition;
+
+        Vector3Int warpTarget_down = new Vector3Int(currentFocusPosition.x, currentFocusPosition.y-1, currentFocusPosition.z);
+        Vector3Int warpTarget_left = new Vector3Int(currentFocusPosition.x -1, currentFocusPosition.y, currentFocusPosition.z);
+        Vector3Int warpTarget_up = new Vector3Int(currentFocusPosition.x, currentFocusPosition.y+1, currentFocusPosition.z);
+        Vector3Int warpTarget_right = new Vector3Int(currentFocusPosition.x+1, currentFocusPosition.y, currentFocusPosition.z);
+
+        if(!grid.boundTilemap.HasTile(warpTarget) && !TileGrid.CheckObstaclePosition(warpTarget))
+        {
+            warpTarget = currentFocusPosition;
+        }else if(!grid.boundTilemap.HasTile(warpTarget_down) && !TileGrid.CheckObstaclePosition(warpTarget_down))
+        {
+            warpTarget = warpTarget_down;
+        }else if(!grid.boundTilemap.HasTile(warpTarget_left) && !TileGrid.CheckObstaclePosition(warpTarget_left))
+        {
+            warpTarget = warpTarget_left;
+
+        }else if(!grid.boundTilemap.HasTile(warpTarget_up) && !TileGrid.CheckObstaclePosition(warpTarget_up))
+        {
+            warpTarget = warpTarget_up;
+        }else if(!grid.boundTilemap.HasTile(warpTarget_right) && !TileGrid.CheckObstaclePosition(warpTarget_right))
+        {
+            warpTarget = warpTarget_right;
+        }else{
+            return;
+        }
+
+        if(hasTrapInPosition(warpTarget)) return;
+        InputManager.InputEvent.Invoke_Move(warpTarget);
+
     }
 
     private void Update() {
@@ -320,6 +353,9 @@ public class StageManager : MonoBehaviour, IStageManager
                 EventManager.instance.Item_Count_Change_Invoke_Event(EventType.Item_Use, Item.Potion, potionCount);
                 HeartChange(1);
                 GameAudioManager.instance.PlaySFXMusic(SFXAudioType.potion);
+            break;
+            case ItemUseType.Shovel :
+                MoveOrShovelOrInteract();
             break;
         }
     }
@@ -611,7 +647,6 @@ public class StageManager : MonoBehaviour, IStageManager
     public void SetFlag()
     {
         SetFlag(currentFocusPosition);
-
     }
 
     private void SetFlag(Vector3Int cellPos, bool forceful = false)
