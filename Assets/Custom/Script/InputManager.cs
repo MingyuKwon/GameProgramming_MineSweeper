@@ -70,51 +70,28 @@ private bool isLongPress = false;
 private void Update() {
     if(StageManager.isStageInputBlocked) return;
 
-    bool input2Ok = false;
-
-    if (Input.touchCount > 0)
-    {
-        EventManager.instance.SetFocusEvent?.Invoke(Input.mousePosition);
-        return;
-    }
-
-
-    input2Ok = false;
-
     if (currentInputHardware == IngameInputHardWare.Mouse)
     {
         bool isDownButton0 = Input.GetMouseButtonDown(0); // 좌 클릭
-        bool isDownButton1 = Input.GetMouseButtonDown(1); // 우 클릭
-        //bool isDownButton2 = Input.GetMouseButtonDown(2); // 마우스 휠
-
-        // if(isDownButton2)
-        // {
-        //     if(StageManager.isNowInputtingItem)
-        //     {
-        //         input2Ok = true;
-        //         StageManager.instance?.ItemPanelShow(false);
-        //     }
-        // }
 
         if(EventSystem.current.IsPointerOverGameObject()) return;
 
         if(isDownButton0)
         {
-            //StageManager.instance?.MoveOrShovelOrInteract(false);
-
             EventManager.instance.SetFocusEvent?.Invoke(Input.mousePosition);
         }
 
-        if(isDownButton1)
-        {
-            StageManager.instance?.SetFlag();
-        }
-        // else if(isDownButton2)
-        // {
-        //     if(input2Ok) return;
+    }
 
-        //     StageManager.instance?.ItemPanelShow(true);
-        // }
+    if (Input.touchCount > 0)
+    {
+        Touch touch = Input.GetTouch(0);
+
+        if (!EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+        {
+            Vector3 touchPosition = touch.position;
+            EventManager.instance.SetFocusEvent?.Invoke(touchPosition);
+        }
     }
 }
 

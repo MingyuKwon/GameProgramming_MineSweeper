@@ -126,7 +126,7 @@ public class StageManager : MonoBehaviour, IStageManager
 
     public bool isMagGlassEnable()
     {
-        return (magGlassCount > 0) && !isStageInputBlocked;
+        return (magGlassCount > 0) && !isFoucusOnObstacle &&  !isStageInputBlocked;
     }
 
     public bool isHolyWaterEnable()
@@ -316,17 +316,17 @@ public class StageManager : MonoBehaviour, IStageManager
         if(!grid.boundTilemap.HasTile(warpTarget) && !TileGrid.CheckObstaclePosition(warpTarget) && !hasTrapInPosition(warpTarget))
         {
             warpTarget = currentFocusPosition;
-        }else if(!grid.boundTilemap.HasTile(warpTarget_down) && !TileGrid.CheckObstaclePosition(warpTarget_down)&& !hasTrapInPosition(warpTarget))
+        }else if(!grid.boundTilemap.HasTile(warpTarget_down) && !TileGrid.CheckObstaclePosition(warpTarget_down)&& !hasTrapInPosition(warpTarget_down))
         {
             warpTarget = warpTarget_down;
-        }else if(!grid.boundTilemap.HasTile(warpTarget_left) && !TileGrid.CheckObstaclePosition(warpTarget_left) && !hasTrapInPosition(warpTarget))
+        }else if(!grid.boundTilemap.HasTile(warpTarget_left) && !TileGrid.CheckObstaclePosition(warpTarget_left) && !hasTrapInPosition(warpTarget_left))
         {
             warpTarget = warpTarget_left;
 
-        }else if(!grid.boundTilemap.HasTile(warpTarget_up) && !TileGrid.CheckObstaclePosition(warpTarget_up) && !hasTrapInPosition(warpTarget))
+        }else if(!grid.boundTilemap.HasTile(warpTarget_up) && !TileGrid.CheckObstaclePosition(warpTarget_up) && !hasTrapInPosition(warpTarget_up))
         {
             warpTarget = warpTarget_up;
-        }else if(!grid.boundTilemap.HasTile(warpTarget_right) && !TileGrid.CheckObstaclePosition(warpTarget_right) && !hasTrapInPosition(warpTarget))
+        }else if(!grid.boundTilemap.HasTile(warpTarget_right) && !TileGrid.CheckObstaclePosition(warpTarget_right) && !hasTrapInPosition(warpTarget_right))
         {
             warpTarget = warpTarget_right;
         }else{
@@ -539,9 +539,17 @@ public class StageManager : MonoBehaviour, IStageManager
 
     private void SetFocus(Vector3 mousePos)
     {
+        float screenWidth = Screen.width;
+        float ignoreMargin = 180f;
+
+        if (mousePos.x < ignoreMargin || mousePos.x > screenWidth - ignoreMargin)
+        {
+            Debug.Log("Mouse position is in the ignored margin area.");
+            return; 
+        }
+
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
         Vector3Int cellPos = TileGrid.CheckCellPosition(worldPos);
-        //cellPos = PlayerManager.instance.PlayerCellPosition;
 
         if(cellPos == currentFocusPosition) return; // 만약 포커스가 아직 바뀌지 않았다면 요청 무시
         if(grid.boundTilemap.HasTile(cellPos))  return; // 해당 위치가 필드 바깥이면 무시
