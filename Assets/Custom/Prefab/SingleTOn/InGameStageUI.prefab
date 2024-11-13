@@ -12438,6 +12438,9 @@ MonoBehaviour:
   - {fileID: 3429522036865047489}
   - {fileID: 3429522036911442988}
   - {fileID: 3429522037499991972}
+  - {fileID: 2493685857539346227}
+  - {fileID: 1341778738166338535}
+  - {fileID: 3394990897706748606}
   leftTimeText: {fileID: 3429522037476595645}
   elapsedTimeText: {fileID: 3429522036550628317}
   mineCount: {fileID: 3429522036679230305}
@@ -12487,12 +12490,22 @@ MonoBehaviour:
   - Displays numbers on the ground to distinguish between traps and treasures
   - When sprinkled on an obstacle, it reveals whether there's a treasure underneath
     or not
+  - indicates when there seems to be something under the obstacle
+  - 'Break the obstacle: a mine is removed, but a treasure means game over'
+  - Dig through the obstacle to check what's hidden underneath
   KoreanUsableText:
   - "\uCCB4\uB825\uC744 1\uCE78 \uD68C\uBCF5\uD569\uB2C8\uB2E4"
   - "\uBC14\uB2E5\uC5D0 \uC788\uB294 \uC22B\uC790\uB97C \uD568\uC815\uACFC \uBCF4\uBB3C\uC744
     \uAD6C\uBD84\uD574\uC11C \uBCF4\uC5EC\uC90D\uB2C8\uB2E4"
   - "\uC7A5\uC560\uBB3C \uC544\uB798\uC5D0 \uBCF4\uBB3C\uC774 \uC788\uB294\uC9C0
     \uC5C6\uB294\uC9C0\uB97C \uD655\uC778\uD574 \uC90D\uB2C8\uB2E4"
+  - "\uC7A5\uC560\uBB3C \uC544\uB798\uC5D0 \uBB34\uC5B8\uAC00 \uC788\uB294 \uAC83
+    \uAC19\uC744 \uB54C \uD45C\uC2DC\uB97C \uD569\uB2C8\uB2E4"
+  - "\uC7A5\uC560\uBB3C\uC744 \uAE68\uBC84\uB9AC\uACE0 \uC544\uB798\uC5D0 \uC9C0\uB8B0\uAC00
+    \uC788\uB2E4\uBA74 \uC5C6\uC560 \uBC84\uB9BD\uB2C8\uB2E4. \uB2E4\uB9CC \uC544\uB798\uC5D0
+    \uBCF4\uBB3C\uC774 \uC788\uB2E4\uBA74 \uAC8C\uC784 \uC624\uBC84\uC785\uB2C8\uB2E4"
+  - "\uC7A5\uC560\uBB3C\uC744 \uD30C\uD5E4\uCCD0\uC11C \uC544\uB798\uC5D0 \uBB50\uAC00
+    \uC788\uB294\uC9C0 \uD655\uC778\uD574 \uBD05\uB2C8\uB2E4"
   EnglishEquippedText:
   - 
   - 

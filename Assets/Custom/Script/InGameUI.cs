@@ -68,8 +68,8 @@ public class InGameUI : MonoBehaviour, AlertCallBack
 
     [Space]
     [Header("Texts")]
-    public string[] EnglishUsableText = {"Restores 1 unit of health", "Displays numbers on the ground to distinguish between traps and treasures", "When sprinkled on an obstacle, it reveals whether there's a treasure underneath or not"};
-    public string[] KoreanUsableText = {"체력을 1칸 회복합니다", "바닥에 있는 숫자를 함정과 보물을 구분해서 보여줍니다", "장애물 아래에 보물이 있는지 없는지를 확인해 줍니다"};
+    public string[] EnglishUsableText = {"Restores 1 unit of health", "Displays numbers on the ground to distinguish between traps and treasures", "When sprinkled on an obstacle, it reveals whether there's a treasure underneath or not", "t indicates when there seems to be something under the obstacle.", "If you break the obstacle and find a mine underneath, it will be removed. However, if there's a treasure underneath, it's game over.", "Dig through the obstacle to check what's hidden underneath"};
+    public string[] KoreanUsableText = {"체력을 1칸 회복합니다", "바닥에 있는 숫자를 함정과 보물을 구분해서 보여줍니다", "장애물 아래에 보물이 있는지 없는지를 확인해 줍니다", "장애물 아래에 무언가 있는 것 같을 때 표시를 합니다", "장애물을 깨버리고 아래에 지뢰가 있다면 없애 버립니다. 다만 아래에 보물이 있다면 게임 오버입니다", "장애물을 파헤쳐서 아래에 뭐가 있는지 확인해 봅니다"};
 
     public string[] EnglishEquippedText = {
         "",
@@ -300,10 +300,6 @@ public class InGameUI : MonoBehaviour, AlertCallBack
 
         itemButtons = totalItemPanel.GetComponentsInChildren<Button>();
         itemimages = totalItemPanel.GetComponentsInChildren<Image>();
-
-        usableItemExplain[0].text = KoreanUsableText[0];
-        usableItemExplain[1].text = KoreanUsableText[1];
-        usableItemExplain[2].text = KoreanUsableText[2];
     }
 
     private void SetLanguageTexts()
@@ -313,12 +309,20 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             usableItemExplain[0].text = EnglishUsableText[0];
             usableItemExplain[1].text = EnglishUsableText[1];
             usableItemExplain[2].text = EnglishUsableText[2];
+            usableItemExplain[3].text = EnglishUsableText[3];
+            usableItemExplain[4].text = EnglishUsableText[4];
+            usableItemExplain[5].text = EnglishUsableText[5];
+
 
         }else if(LanguageManager.currentLanguage == "Korean")
         {
             usableItemExplain[0].text = KoreanUsableText[0];
             usableItemExplain[1].text = KoreanUsableText[1];
             usableItemExplain[2].text = KoreanUsableText[2];
+            usableItemExplain[3].text = KoreanUsableText[3];
+            usableItemExplain[4].text = KoreanUsableText[4];
+            usableItemExplain[5].text = KoreanUsableText[5];
+
         }
     }
 
