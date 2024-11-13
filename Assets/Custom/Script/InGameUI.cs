@@ -116,6 +116,105 @@ public class InGameUI : MonoBehaviour, AlertCallBack
         GameRestartMenu();
     }
 
+    [Space]
+    [Space]
+    [Space]
+    public Button potionButton; 
+    public Button glassButton; 
+    public Button waterButton; 
+    public Button flagButton; 
+    public Button crashButton; 
+    public Button shovelButton; 
+
+    private void Update() {
+
+        if(StageManager.instance)
+        {
+            if(potionButton)
+            {
+                if(StageManager.instance.isPotionEnable())
+                {
+                    potionButton.interactable  = true;
+                }else
+                {
+                    potionButton.interactable  = false;
+                }
+            }
+
+            if(glassButton)
+            {
+                if(StageManager.instance.isMagGlassEnable())
+                {
+                    glassButton.interactable  = true;
+                }else
+                {
+                    glassButton.interactable  = false;
+                }
+            }
+
+            if(waterButton)
+            {
+                if(StageManager.instance.isHolyWaterEnable())
+                {
+                    waterButton.interactable  = true;
+                }else
+                {
+                    waterButton.interactable  = false;
+                }
+            }
+        }else
+        {
+            if(potionButton)
+            {
+                potionButton.interactable  = false;
+            }
+
+            if(glassButton)
+            {
+                glassButton.interactable  = false;
+            }
+
+            if(waterButton)
+            {
+                waterButton.interactable  = false;
+            }
+        }
+
+        if(flagButton)
+        {
+            if(StageManager.isStageInputBlocked)
+            {
+                flagButton.interactable  = false;
+            }else
+            {
+                flagButton.interactable  = true;
+            }
+        }
+
+        if(crashButton)
+        {
+            if(StageManager.isStageInputBlocked)
+            {
+                crashButton.interactable  = false;
+            }else
+            {
+                crashButton.interactable  = true;
+            }
+        }
+
+        if(shovelButton)
+        {
+            if(StageManager.isStageInputBlocked)
+            {
+                shovelButton.interactable  = false;
+            }else
+            {
+                shovelButton.interactable  = true;
+            }
+        }
+
+    }
+
     private AlertCallBackDelgate callbackFunction;
 
     public void GameRestartAlertShow()

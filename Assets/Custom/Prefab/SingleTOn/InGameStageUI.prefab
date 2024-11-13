@@ -12531,6 +12531,12 @@ MonoBehaviour:
   - "\uC2A4\uD14C\uC774\uC9C0 \uC2DC\uC791\uC2DC, \uC81C\uD55C\uC2DC\uAC04\uC744
     \uCD94\uAC00\uB85C \uC9C0\uAE09\uBC1B\uC2B5\uB2C8\uB2E4"
   - "\uCD5C\uB300 \uCCB4\uB825\uC774 3 \uC62C\uB77C\uAC11\uB2C8\uB2E4"
+  potionButton: {fileID: 903936341605755928}
+  glassButton: {fileID: 3521540209923169088}
+  waterButton: {fileID: 9182852578632236472}
+  flagButton: {fileID: 5609248652525545879}
+  crashButton: {fileID: 8053993636244942826}
+  shovelButton: {fileID: 4519631977827168866}
 --- !u!1 &3429522036453131594
 GameObject:
   m_ObjectHideFlags: 0
@@ -21255,7 +21261,7 @@ MonoBehaviour:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1

@@ -130,6 +130,8 @@ public class EventManager : MonoBehaviour
         ItemUseEvent.Invoke(itemUseType, itemUseDirection);
     }
 
+    public Action AfterMoveCallBackEvent;
+
     public Action StageClearEvent;
     public Action ObtainBigItemEvent;
 

@@ -195,6 +195,8 @@ public class PlayerMove : MonoBehaviour
 
     
         StageManager.stageInputBlock--;
+
+        EventManager.instance.AfterMoveCallBackEvent?.Invoke();
     }
 
     IEnumerator MoveTeleport(Vector3Int movePosition)
@@ -206,5 +208,7 @@ public class PlayerMove : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
     
         StageManager.stageInputBlock--;
+
+        EventManager.instance.AfterMoveCallBackEvent?.Invoke();
     }
 }

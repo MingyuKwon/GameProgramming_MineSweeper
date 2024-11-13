@@ -336,6 +336,11 @@ public class TileGrid : MonoBehaviour, IGridInterface
         
     }
 
+    public void SetInteract_OkAuto()
+    {
+   
+    }
+
     public void SetFlag(Vector3Int position , Flag flag)
     {
         switch(flag)

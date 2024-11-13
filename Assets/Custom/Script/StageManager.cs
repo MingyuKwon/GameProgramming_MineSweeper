@@ -119,6 +119,22 @@ public class StageManager : MonoBehaviour, IStageManager
     int magGlassCount = 0;
     int holyWaterCount = 0;
 
+    public bool isPotionEnable()
+    {
+        return (potionCount > 0) && !isStageInputBlocked;
+    }
+
+    public bool isMagGlassEnable()
+    {
+        return (magGlassCount > 0) && !isStageInputBlocked;
+    }
+
+    public bool isHolyWaterEnable()
+    {
+        return (holyWaterCount > 0) && !isStageInputBlocked;
+    }
+
+
     bool isFoucusOnObstacle {
         get{
             return TileGrid.CheckObstaclePosition(currentFocusPosition);
@@ -253,12 +269,13 @@ public class StageManager : MonoBehaviour, IStageManager
         {
             if(isNowInputtingItem) return;
             if(shovelLock) return;
-
-            MoveToCurrentFocusPosition();
-            if(!isNearFlag) return;
-            GameAudioManager.instance.PlaySFXMusic(SFXAudioType.Shovel);
-            RemoveObstacle(currentFocusPosition);     
-
+            
+            EventManager.instance.AfterMoveCallBackEvent += RemoveObstacle;
+            
+            if(!isNearFlag)
+            {
+                MoveToCurrentFocusPosition();
+            }
             
         }else
         {
@@ -308,9 +325,10 @@ public class StageManager : MonoBehaviour, IStageManager
         if(isNowInitializing) return;
 
         SetPlayer_Overlay();
-        SetInteract_Ok();
-
-        
+        if(grid)
+        {
+            grid.SetInteract_OkAuto();
+        }
     }
 
     private void OnEnable() {
@@ -337,18 +355,51 @@ public class StageManager : MonoBehaviour, IStageManager
         switch(itemUseType)
         {
             case ItemUseType.Holy_Water :
-                SetTreasureSearch(currentFocusPosition);
-                GameAudioManager.instance.PlaySFXMusic(SFXAudioType.HolyWater);
+                if(holyWaterCount <= 0) return;
+                if(!CheckHasObstacle(currentFocusPosition)) return;
+
+                if(!isNearFlag)
+                {
+                    EventManager.instance.AfterMoveCallBackEvent += Use_Holy_Water;
+                    MoveToCurrentFocusPosition();
+                }else{
+                    Use_Holy_Water();
+                }
+
+                
             break;
             case ItemUseType.Crash :
-                BombObstacle(currentFocusPosition);
-                GameAudioManager.instance.PlaySFXMusic(SFXAudioType.Bomb);
+                if(!CheckHasObstacle(currentFocusPosition)) return;
+
+                if(!isNearFlag)
+                {
+                    EventManager.instance.AfterMoveCallBackEvent += Use_Pickaxe;
+                    MoveToCurrentFocusPosition();
+                }else{
+                    Use_Pickaxe();
+                }
+
             break;
             case ItemUseType.Mag_Glass :
-                ChangeTotalToSeperate(currentFocusPosition);
-                GameAudioManager.instance.PlaySFXMusic(SFXAudioType.Mag_Glass);
+                if(magGlassCount <= 0) return;
+                if(CheckHasObstacle(currentFocusPosition)) return; // 해당 위치에 장애물 타일이 있으면 그 자리에서 반환
+                Vector3Int arrayPos = ChangeCellPosToArrayPos(currentFocusPosition);
+                if(totalNumArray[arrayPos.y, arrayPos.x] == 0) return; // 만약 해당 위치가 0이어도 반환 (써도 의미가 없음)
+                if(totalNumMask[arrayPos.y, arrayPos.x]) return;
+
+                if(gapBetweenPlayerFocus.magnitude != 0)
+                {
+                    EventManager.instance.AfterMoveCallBackEvent += Use_MagGlass;
+                    MoveToCurrentFocusPosition();
+
+                }else
+                {
+                    Use_MagGlass();
+                }
+                
             break;
             case ItemUseType.Potion :
+                if(potionCount <= 0) return;
                 potionCount--;
                 EventManager.instance.Item_Count_Change_Invoke_Event(EventType.Item_Use, Item.Potion, potionCount);
                 HeartChange(1);
@@ -359,9 +410,45 @@ public class StageManager : MonoBehaviour, IStageManager
             break;
         }
     }
+
+    private void Use_Holy_Water()
+    {
+        SetTreasureSearch(currentFocusPosition);
+        GameAudioManager.instance.PlaySFXMusic(SFXAudioType.HolyWater);
+
+        EventManager.instance.AfterMoveCallBackEvent -= Use_Holy_Water;
+    }
+
+    private void Use_Pickaxe()
+    {
+        BombObstacle(currentFocusPosition);
+        GameAudioManager.instance.PlaySFXMusic(SFXAudioType.Bomb);
+
+        EventManager.instance.AfterMoveCallBackEvent -= Use_Pickaxe;
+    }
+
+    private void Use_MagGlass()
+    {
+        ChangeTotalToSeperate(currentFocusPosition);
+        GameAudioManager.instance.PlaySFXMusic(SFXAudioType.Mag_Glass);
+
+        EventManager.instance.AfterMoveCallBackEvent -= Use_MagGlass;
+    }
+    
+
+    private void RemoveObstacle()
+    {
+        if(!isNearFlag) return;
+        GameAudioManager.instance.PlaySFXMusic(SFXAudioType.Shovel);
+        RemoveObstacle(currentFocusPosition);     
+
+        EventManager.instance.AfterMoveCallBackEvent -= RemoveObstacle;
+    }
     
     private void SetInteract_Ok()
     {
+
+        //여기에 그냥 전체 블럭을 뒤져보고, 근처에 빈 공간이 하나라도 있다면 자기를 빛나게 하자
        Vector3Int playerPosition = PlayerManager.instance.PlayerCellPosition;
 
        if(is1Next)
