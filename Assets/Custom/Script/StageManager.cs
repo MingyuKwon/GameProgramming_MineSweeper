@@ -285,11 +285,15 @@ public class StageManager : MonoBehaviour, IStageManager
             if(isNowInputtingItem) return;
             if(shovelLock) return;
             
-            EventManager.instance.AfterMoveCallBackEvent += RemoveObstacle;
+            
             
             if(!isNearFlag)
             {
+                EventManager.instance.AfterMoveCallBackEvent += RemoveObstacle;
                 MoveToCurrentFocusPosition();
+            }else
+            {
+                RemoveObstacle();
             }
             
         }else
