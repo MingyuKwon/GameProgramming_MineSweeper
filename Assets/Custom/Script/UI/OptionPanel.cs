@@ -21,7 +21,6 @@ public class OptionPanel : MonoBehaviour
     string[] generalKoreanTexts = {"언어"};
 
     [Space]
-    public Dropdown resolution;
     public Dropdown language;
 
     [Space]
@@ -39,27 +38,7 @@ public class OptionPanel : MonoBehaviour
 
         switch(ResolutionManager.windowedWidth)
         {
-            case 1024 :
-                resolution.value = 0;
-                break;
-            case 1152 :
-                resolution.value = 1;
-                break;
-            case 1280 :
-                resolution.value = 2;
-                break;
-            case 1366 :
-                resolution.value = 3;
-                break;
-            case 1600 :
-                resolution.value = 4;
-                break;
-            case 1920 :
-                resolution.value = 5;
-                break;
-            case 2560 :
-                resolution.value = 6;
-                break;
+
         }
 
         switch(LanguageManager.currentLanguage)
