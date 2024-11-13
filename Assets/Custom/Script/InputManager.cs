@@ -74,56 +74,8 @@ private void Update() {
 
     if (Input.touchCount > 0)
     {
-        Touch touch = Input.GetTouch(0);
-        
-        if (touch.phase == TouchPhase.Began)
-        {
-            touchStartTime = Time.time; // 터치 시작 시간 기록
-            isLongPress = false; // 초기화
-
-            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) return;
-
-            if (StageManager.isNowInputtingItem)
-            {
-                input2Ok = true;
-                StageManager.instance?.ItemPanelShow(false);
-                return;
-            }
-
-            if (touch.tapCount == 1)
-            {
-                StageManager.instance?.MoveOrShovelOrInteract(false); // 좌클릭에 해당하는 기능
-            }
-            else if (touch.tapCount == 2)
-            {
-                StageManager.instance?.SetFlag(); // 우클릭에 해당하는 기능
-            }
-        }
-        // 터치가 고정된 상태일 때 길게 누르기 감지
-        else if (touch.phase == TouchPhase.Stationary)
-        {
-            if (Time.time - touchStartTime > longPressThreshold)
-            {
-                if (!isLongPress)
-                {
-                    isLongPress = true; // 한 번만 실행되도록
-                    StageManager.instance?.ItemPanelShow(true); // 길게 누르기로 아이템 패널 표시
-                }
-            }
-        }
-        // 터치가 끝났을 때
-        else if (touch.phase == TouchPhase.Ended)
-        {
-            if (input2Ok) return;
-
-            if (!isLongPress)
-            {
-                StageManager.instance?.ItemPanelShow(true); // 마우스 휠에 해당하는 기능
-            }
-
-            isLongPress = false; // 길게 누르기 초기화
-            touchStartTime = 0f; // 터치 시간 초기화
-        }
+        EventManager.instance.SetFocusEvent?.Invoke(Input.mousePosition);
+        return;
     }
 
 

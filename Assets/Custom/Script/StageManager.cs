@@ -313,20 +313,20 @@ public class StageManager : MonoBehaviour, IStageManager
         Vector3Int warpTarget_up = new Vector3Int(currentFocusPosition.x, currentFocusPosition.y+1, currentFocusPosition.z);
         Vector3Int warpTarget_right = new Vector3Int(currentFocusPosition.x+1, currentFocusPosition.y, currentFocusPosition.z);
 
-        if(!grid.boundTilemap.HasTile(warpTarget) && !TileGrid.CheckObstaclePosition(warpTarget))
+        if(!grid.boundTilemap.HasTile(warpTarget) && !TileGrid.CheckObstaclePosition(warpTarget) && !hasTrapInPosition(warpTarget))
         {
             warpTarget = currentFocusPosition;
-        }else if(!grid.boundTilemap.HasTile(warpTarget_down) && !TileGrid.CheckObstaclePosition(warpTarget_down))
+        }else if(!grid.boundTilemap.HasTile(warpTarget_down) && !TileGrid.CheckObstaclePosition(warpTarget_down)&& !hasTrapInPosition(warpTarget))
         {
             warpTarget = warpTarget_down;
-        }else if(!grid.boundTilemap.HasTile(warpTarget_left) && !TileGrid.CheckObstaclePosition(warpTarget_left))
+        }else if(!grid.boundTilemap.HasTile(warpTarget_left) && !TileGrid.CheckObstaclePosition(warpTarget_left) && !hasTrapInPosition(warpTarget))
         {
             warpTarget = warpTarget_left;
 
-        }else if(!grid.boundTilemap.HasTile(warpTarget_up) && !TileGrid.CheckObstaclePosition(warpTarget_up))
+        }else if(!grid.boundTilemap.HasTile(warpTarget_up) && !TileGrid.CheckObstaclePosition(warpTarget_up) && !hasTrapInPosition(warpTarget))
         {
             warpTarget = warpTarget_up;
-        }else if(!grid.boundTilemap.HasTile(warpTarget_right) && !TileGrid.CheckObstaclePosition(warpTarget_right))
+        }else if(!grid.boundTilemap.HasTile(warpTarget_right) && !TileGrid.CheckObstaclePosition(warpTarget_right) && !hasTrapInPosition(warpTarget))
         {
             warpTarget = warpTarget_right;
         }else{
