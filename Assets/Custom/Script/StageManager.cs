@@ -134,6 +134,21 @@ public class StageManager : MonoBehaviour, IStageManager
         return (holyWaterCount > 0) && !isStageInputBlocked;
     }
 
+    public bool isFlagEnable()
+    {
+        return isFoucusOnObstacle && !isStageInputBlocked;
+    }
+
+    public bool isShovelEnable()
+    {
+        return !isStageInputBlocked;
+    }
+
+    public bool isCrashEnable()
+    {
+        return isFoucusOnObstacle && !isStageInputBlocked;
+    }
+
 
     bool isFoucusOnObstacle {
         get{

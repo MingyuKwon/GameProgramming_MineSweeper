@@ -162,6 +162,40 @@ public class InGameUI : MonoBehaviour, AlertCallBack
                     waterButton.interactable  = false;
                 }
             }
+
+            if(flagButton)
+            {
+                if(StageManager.instance.isFlagEnable())
+                {
+                    flagButton.interactable  = true;
+                }else
+                {
+                    flagButton.interactable  = false;
+                }
+            }
+
+            if(crashButton)
+            {
+                if(StageManager.instance.isCrashEnable())
+                {
+                    crashButton.interactable  = true;
+                }else
+                {
+                    crashButton.interactable  = false;
+                }
+            }
+
+            if(shovelButton)
+            {
+                if(StageManager.instance.isShovelEnable())
+                {
+                    shovelButton.interactable  = true;
+                }else
+                {
+                    shovelButton.interactable  = false;
+                }
+            }
+
         }else
         {
             if(potionButton)
@@ -178,40 +212,24 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             {
                 waterButton.interactable  = false;
             }
-        }
 
-        if(flagButton)
-        {
-            if(StageManager.isStageInputBlocked)
+            if(flagButton)
             {
                 flagButton.interactable  = false;
-            }else
-            {
-                flagButton.interactable  = true;
             }
-        }
 
-        if(crashButton)
-        {
-            if(StageManager.isStageInputBlocked)
+            if(crashButton)
             {
                 crashButton.interactable  = false;
-            }else
+            }
+
+            if(shovelButton)
             {
-                crashButton.interactable  = true;
+                shovelButton.interactable  = false;
             }
         }
 
-        if(shovelButton)
-        {
-            if(StageManager.isStageInputBlocked)
-            {
-                shovelButton.interactable  = false;
-            }else
-            {
-                shovelButton.interactable  = true;
-            }
-        }
+        
 
     }
 
