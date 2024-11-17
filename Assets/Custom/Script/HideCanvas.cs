@@ -11,8 +11,16 @@ public class HideCanvas : MonoBehaviour
     private void Awake() {
         StartCoroutine(LoadingText());
 
-        LoadScene(LoadingInformation.loadingSceneName);
-        LoadingInformation.loadingSceneName = null;
+        if(TutorialGuide.bTutorialRestart)
+        {
+            TutorialGuide.bTutorialRestart = false;
+            LoadScene("Tutorial"); 
+        }else
+        {
+            LoadScene(LoadingInformation.loadingSceneName);
+            LoadingInformation.loadingSceneName = null;
+        }
+        
     }
 
     IEnumerator LoadingText()

@@ -143,13 +143,13 @@ public class EventManager : MonoBehaviour
     public Action UpdateRightPanelEvent;
     public void UpdateRightPanel_Invoke_Event()
     {
-        UpdateRightPanelEvent.Invoke();
+        UpdateRightPanelEvent?.Invoke();
     }
 
     public Action UpdateLeftPanelEvent;
     public void UpdateLeftPanel_Invoke_Event()
     {
-        UpdateLeftPanelEvent.Invoke();
+        UpdateLeftPanelEvent?.Invoke();
     }
 
     public Action BackToMainMenuEvent;
@@ -166,6 +166,13 @@ public class EventManager : MonoBehaviour
     }
 
     #endregion
+
+    public Action<string[] , bool , int , int > showNoticeUIEvent;
+    public void Invoke_showNoticeUIEvent(string[] texts, bool isTyping, int panelWidth, int panelHeight)
+    {
+        showNoticeUIEvent?.Invoke(texts,isTyping, panelWidth, panelHeight);
+    }
+
 
     public static EventManager instance = null;
     public static bool isAnimationPlaying{

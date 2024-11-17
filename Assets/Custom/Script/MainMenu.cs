@@ -105,6 +105,12 @@ public class MainMenu : MonoBehaviour , AlertCallBack
         SceneManager.LoadScene("Before Enter Dungeon");
     }
 
+    public void StartTutorial()
+    {
+        MakeScreenBlack.Hide();
+        SceneManager.LoadScene("Tutorial");
+    }
+
     public void ExitGame()
     {
         callbackFunction = QuitGame;
