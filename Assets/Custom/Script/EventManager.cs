@@ -96,6 +96,8 @@ public class EventManager : MonoBehaviour
         Item_Count_Change_Event.Invoke(eventType, item, count, changeAmount);
     }
 
+    public Action TutorialShowEvent;
+
     public Action<Vector3> SetFocusEvent;
 
     public Action<bool, GameOver_Reason> Game_Over_Event;

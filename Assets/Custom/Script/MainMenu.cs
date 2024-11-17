@@ -108,6 +108,7 @@ public class MainMenu : MonoBehaviour , AlertCallBack
     public void StartTutorial()
     {
         MakeScreenBlack.Hide();
+        TutorialGuide.bNowTutorial = true;
         SceneManager.LoadScene("Tutorial");
     }
 

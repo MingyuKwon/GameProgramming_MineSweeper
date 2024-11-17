@@ -106,7 +106,11 @@ public class OptionPanel : MonoBehaviour
 
         for(int i=0; i<OptionScreens.Length; i++)
         {
-            OptionScreens[i].text = tempScreenText[i];
+            if(OptionScreens[i])
+            {
+                OptionScreens[i].text = tempScreenText[i];
+            }
+            
         }
 
         for(int i=0; i<OptionAudio.Length; i++)

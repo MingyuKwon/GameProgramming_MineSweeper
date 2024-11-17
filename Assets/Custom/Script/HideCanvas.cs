@@ -14,6 +14,7 @@ public class HideCanvas : MonoBehaviour
         if(TutorialGuide.bTutorialRestart)
         {
             TutorialGuide.bTutorialRestart = false;
+            TutorialGuide.bNowTutorial = true;
             LoadScene("Tutorial"); 
         }else
         {

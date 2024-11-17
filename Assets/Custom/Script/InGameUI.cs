@@ -134,7 +134,14 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             {
                 if(StageManager.instance.isPotionEnable())
                 {
-                    potionButton.interactable  = true;
+                    if(TutorialGuide.bNowTutorial && !TutorialGuide.IsTutorialPotionEnable())
+                    {
+                        potionButton.interactable  = false;
+                    }else
+                    {
+                        potionButton.interactable  = true;
+                    }
+                    
                 }else
                 {
                     potionButton.interactable  = false;
@@ -145,7 +152,14 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             {
                 if(StageManager.instance.isMagGlassEnable())
                 {
-                    glassButton.interactable  = true;
+                    if(TutorialGuide.bNowTutorial && !TutorialGuide.IsTutorialMagGlassEnable())
+                    {
+                        glassButton.interactable  = false;
+                    }else
+                    {
+                        glassButton.interactable  = true;
+                    }
+                    
                 }else
                 {
                     glassButton.interactable  = false;
@@ -156,7 +170,14 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             {
                 if(StageManager.instance.isHolyWaterEnable())
                 {
-                    waterButton.interactable  = true;
+                    if(TutorialGuide.bNowTutorial && !TutorialGuide.IsTutorialWaterEnable())
+                    {
+                        waterButton.interactable  = false;
+                    }else
+                    {
+                        waterButton.interactable  = true;
+                    }
+                    
                 }else
                 {
                     waterButton.interactable  = false;
@@ -178,7 +199,14 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             {
                 if(StageManager.instance.isCrashEnable())
                 {
-                    crashButton.interactable  = true;
+                    if(TutorialGuide.bNowTutorial && !TutorialGuide.IsTutorialCrashEnable())
+                    {
+                        crashButton.interactable  = false;
+                    }else
+                    {
+                        crashButton.interactable  = true;
+                    }
+                    
                 }else
                 {
                     crashButton.interactable  = false;
@@ -189,7 +217,13 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             {
                 if(StageManager.instance.isShovelEnable())
                 {
-                    shovelButton.interactable  = true;
+                    if(TutorialGuide.bNowTutorial && !TutorialGuide.IsTutoriaShovelEnable())
+                    {
+                        shovelButton.interactable  = false;
+                    }else
+                    {
+                        shovelButton.interactable  = true;
+                    }
                 }else
                 {
                     shovelButton.interactable  = false;
