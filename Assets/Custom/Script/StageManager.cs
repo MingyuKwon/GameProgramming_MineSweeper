@@ -126,12 +126,12 @@ public class StageManager : MonoBehaviour, IStageManager
 
     public bool isMagGlassEnable()
     {
-        return (magGlassCount > 0) && !isFoucusOnObstacle &&  !isStageInputBlocked;
+        return (magGlassCount > 0) && !isFoucusOnObstacle && (totalNumArray[ChangeCellPosToArrayPos(currentFocusPosition).y, ChangeCellPosToArrayPos(currentFocusPosition).x] != 0)&&  !isStageInputBlocked;
     }
 
     public bool isHolyWaterEnable()
     {
-        return (holyWaterCount > 0) && !isStageInputBlocked;
+        return (holyWaterCount > 0) && isFoucusOnObstacle && !isStageInputBlocked;
     }
 
     public bool isFlagEnable()
@@ -286,7 +286,6 @@ public class StageManager : MonoBehaviour, IStageManager
             if(shovelLock) return;
             
             
-            
             if(!isNearFlag)
             {
                 EventManager.instance.AfterMoveCallBackEvent += RemoveObstacle;
@@ -419,6 +418,10 @@ public class StageManager : MonoBehaviour, IStageManager
             break;
             case ItemUseType.Potion :
                 if(potionCount <= 0) return;
+                if(TutorialGuide.bNowTutorial && TutorialGuide.tutorialIndex == 3)
+                {
+                    EventManager.instance.TutorialShowEvent.Invoke();
+                }
                 potionCount--;
                 EventManager.instance.Item_Count_Change_Invoke_Event(EventType.Item_Use, Item.Potion, potionCount);
                 HeartChange(1);
@@ -581,6 +584,11 @@ public class StageManager : MonoBehaviour, IStageManager
 
             RemoveObstacleTile(cellPos); 
 
+            if(TutorialGuide.bNowTutorial && TutorialGuide.tutorialIndex == 2)
+            {
+                EventManager.instance.TutorialShowEvent.Invoke();
+            }
+
             if(mineTreasureArray[arrayPos.y, arrayPos.x] == -1) // 지뢰
             {
                 EventManager.instance.InvokeEvent(EventType.MineAppear, mineCount);
@@ -657,6 +665,11 @@ public class StageManager : MonoBehaviour, IStageManager
             SetTreasureSearch(cellPos, true);
 
             RemoveObstacleTile(cellPos, true);
+
+            if(TutorialGuide.bNowTutorial && TutorialGuide.tutorialIndex == 6)
+            {
+                EventManager.instance.TutorialShowEvent.Invoke();
+            }
 
             if(mineTreasureArray[arrayPos.y, arrayPos.x] == -2) // 보물
             {
@@ -749,12 +762,19 @@ public class StageManager : MonoBehaviour, IStageManager
         if(totalNumArray[arrayPos.y, arrayPos.x] == 0) return; // 만약 해당 위치가 0이어도 반환 (써도 의미가 없음)
         if(totalNumMask[arrayPos.y, arrayPos.x]) return;
 
+        if(TutorialGuide.bNowTutorial && TutorialGuide.tutorialIndex == 5)
+        {
+            EventManager.instance.TutorialShowEvent.Invoke();
+        }
+
         magGlassCount--;
         EventManager.instance.Item_Count_Change_Invoke_Event(EventType.Item_Use, Item.Mag_Glass, magGlassCount);
 
         totalNumMask[arrayPos.y, arrayPos.x] = true;
         SetPlayer_Overlay(true);
         grid.UpdateSeperateNum(mineNumArray, treasureNumArray, cellPos);
+
+        
 
     }
 
@@ -792,6 +812,11 @@ public class StageManager : MonoBehaviour, IStageManager
         Vector3Int arrayPos = ChangeCellPosToArrayPos(cellPos);
         if(!(CheckHasObstacle(cellPos))) return; // 해당 위치에 장애물 타일이 없으면 무시
         if(treasureSearchMask[arrayPos.y, arrayPos.x] && !forceful) return;
+
+        if(TutorialGuide.bNowTutorial && TutorialGuide.tutorialIndex == 4)
+        {
+            EventManager.instance.TutorialShowEvent.Invoke();
+        }
 
         if(forceful)
         {
@@ -903,7 +928,7 @@ public class StageManager : MonoBehaviour, IStageManager
         treasureNumArray = null;
 
         this.maxHeart = maxHeart;
-        this.currentHeart = currentHeart;
+        this.currentHeart = TutorialGuide.bNowTutorial ? 2 : currentHeart;
 
         startX = -1;
         startY = -1;
@@ -923,7 +948,7 @@ public class StageManager : MonoBehaviour, IStageManager
         this.holyWaterCount = TutorialGuide.bNowTutorial ? 1 : holyWaterCount;
 
 
-        EventManager.instance.Reduce_HeartInvokeEvent(currentHeart, maxHeart);
+        EventManager.instance.Reduce_HeartInvokeEvent(this.currentHeart, maxHeart);
 
         EventManager.instance.Item_Count_Change_Invoke_Event(EventType.Item_Obtain, Item.Potion, this.potionCount);
         EventManager.instance.Item_Count_Change_Invoke_Event(EventType.Item_Obtain, Item.Mag_Glass, this.magGlassCount);
