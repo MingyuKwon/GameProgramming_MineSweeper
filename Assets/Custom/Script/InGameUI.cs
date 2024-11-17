@@ -698,9 +698,9 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             stageType.text = KoreanStage[stagetype];
 
 
-            width.text = "너비 : " + StageInformationManager.StageModestageWidth[stagetype].ToString();
-            height.text = "높이 : " + StageInformationManager.StageModestageHeight[stagetype].ToString();
-            stageIndex.text = "스테이지";
+            width.text = "너비 : " + (TutorialGuide.bNowTutorial ? 7 : StageInformationManager.StageModestageWidth[stagetype].ToString());
+            height.text = "높이 : " + (TutorialGuide.bNowTutorial ? 7 : StageInformationManager.StageModestageHeight[stagetype].ToString());
+            stageIndex.text = (TutorialGuide.bNowTutorial ? "튜토리얼" : "스테이지"); 
 
             
             left.text = "남은 수";
@@ -709,11 +709,10 @@ public class InGameUI : MonoBehaviour, AlertCallBack
             difficultyText.text = EnglishDifficulty[difficulty];
             stageDifficulty.text = EnglishDifficulty[difficulty];
             stageType.text = EnglishStage[stagetype];
-            width.text = "Width : " + StageInformationManager.StageModestageWidth[stagetype].ToString();
-            height.text = "Height : " + StageInformationManager.StageModestageHeight[stagetype].ToString();
-            stageIndex.text = "STAGE";
+            width.text = "Width : " + (TutorialGuide.bNowTutorial ? 7 : StageInformationManager.StageModestageWidth[stagetype].ToString());
+            height.text = "Height : " + (TutorialGuide.bNowTutorial ? 7 : StageInformationManager.StageModestageHeight[stagetype].ToString());
+            stageIndex.text = (TutorialGuide.bNowTutorial ? "TUTORIAL" : "STAGE"); 
 
-            
             left.text = "Left";
         }
         

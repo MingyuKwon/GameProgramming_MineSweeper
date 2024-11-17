@@ -7,6 +7,13 @@ public class TutorialGuide : MonoBehaviour
     public static bool bNowTutorial = false;
     public static bool bTutorialRestart = false;
     public static int tutorialIndex = 0;
+    // 0 -> start
+    // 1 -> flag
+    // 2 -> shovel
+    // 3 -> glass
+    // 4 -> water
+    // 5 -> potion
+    // 6 -> crash
 
     public static bool IsTutoriaShovelEnable()
     {

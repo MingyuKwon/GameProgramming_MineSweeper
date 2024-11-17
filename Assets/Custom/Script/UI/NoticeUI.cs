@@ -57,7 +57,6 @@ public class NoticeUI : MonoBehaviour, IPointerClickHandler
             noticePanel.gameObject.SetActive(true);
             callCount = 0;
             rectTransform.sizeDelta = new Vector2(panelWidth, panelHeight);
-            Debug.Log(LanguageManager.currentLanguage);
 
             if(isTyping)
             {

@@ -763,10 +763,16 @@ public class StageManager : MonoBehaviour, IStageManager
         SetFlag(currentFocusPosition);
     }
 
+
     private void SetFlag(Vector3Int cellPos, bool forceful = false)
     {
         Vector3Int arrayPos = ChangeCellPosToArrayPos(cellPos);
         if(!(CheckHasObstacle(cellPos))) return; // 해당 위치에 장애물 타일이 없으면 무시
+
+        if(TutorialGuide.bNowTutorial && TutorialGuide.tutorialIndex == 1)
+        {
+            EventManager.instance.TutorialShowEvent.Invoke();
+        }
 
         if(forceful)
         {
@@ -902,10 +908,8 @@ public class StageManager : MonoBehaviour, IStageManager
         startX = -1;
         startY = -1;
 
-
-        width = parawidth;
-        height = paraheight;
-
+        width = TutorialGuide.bNowTutorial ? 7 : parawidth;
+        height = TutorialGuide.bNowTutorial ? 7 : paraheight;
 
         Debug.Log("width : " + width + " height : " + height);
 
@@ -914,9 +918,9 @@ public class StageManager : MonoBehaviour, IStageManager
         
         int difficultytemp = (int)StageInformationManager.difficulty;
 
-        this.potionCount = potionCount ;
+        this.potionCount = TutorialGuide.bNowTutorial ? 1 : potionCount;
         this.magGlassCount = magGlassCount ;
-        this.holyWaterCount = holyWaterCount;
+        this.holyWaterCount = TutorialGuide.bNowTutorial ? 1 : holyWaterCount;
 
 
         EventManager.instance.Reduce_HeartInvokeEvent(currentHeart, maxHeart);
@@ -951,7 +955,6 @@ public class StageManager : MonoBehaviour, IStageManager
 
     IEnumerator StartTimer(int totalTime)
     {
-
         this.totalTime = totalTime;
         timeElapsed = 0;
         EventManager.instance.TimerInvokeEvent(timeElapsed, timeLeft);
