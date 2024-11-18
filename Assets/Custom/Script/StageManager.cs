@@ -902,7 +902,12 @@ public class StageManager : MonoBehaviour, IStageManager
     [Button]
     public void DungeonInitialize(int parawidth = DefaultX ,  int paraheight = DefaultY, Difficulty difficulty = Difficulty.Hard, int maxHeart = 3,  int currentHeart = 2, int potionCount = 0, int magGlassCount = 0, int holyWaterCount = 0, int totalTime = 300)
     {
-        switch(StageInformationManager.currentStagetype)
+        if(TutorialGuide.bNowTutorial)
+        {
+            GameAudioManager.instance.PlayBackGroundMusic(BackGroundAudioType.Tutorial);
+        }else
+        {
+            switch(StageInformationManager.currentStagetype)
             {
                 case 0 :
                     GameAudioManager.instance.PlayBackGroundMusic(BackGroundAudioType.Cave);
@@ -914,8 +919,8 @@ public class StageManager : MonoBehaviour, IStageManager
                     GameAudioManager.instance.PlayBackGroundMusic(BackGroundAudioType.Ruin);
                     break;
             }
-        
-        
+        }
+
         EventManager.instance.UpdateLeftPanel_Invoke_Event();
 
         isNowInitializing = true;

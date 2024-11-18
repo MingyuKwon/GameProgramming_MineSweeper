@@ -341,6 +341,7 @@ public class GameAudioManager : MonoBehaviour
         CurrentUISource.volume = currentUIVolume * totalVolme;
         CurrentUISource.Play();
     }
+    
     public void PlayBackGroundMusic(BackGroundAudioType audioType)
     {
         AudioClip targetAudioClip = backGroundAudioClip[(int)audioType];
